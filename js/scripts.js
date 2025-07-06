@@ -63,6 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    
+
     // Set active navigation link
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('nav a').forEach(link => {
