@@ -9,24 +9,30 @@
 </head>
 <body>
     <header>
+    <nav>
         <div class="logo-container">
+            <button class="menu-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
             <div class="logo-img">TGC SA</div>
             <div class="logo-text">Techno Globe Center SA</div>
         </div>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="partners.html">Partners</a></li>
-                <li><a href="about.html" class="active">About</a></li>
-                <li><a href="team.html">Team</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
+          <ul id="nav-list">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="./services.html">Services</a></li>
+            <li><a href="./partners.html">Partners</a></li>
+            <li><a href="./about.html" class="active">About</a></li>
+            <li><a href="./team.html">Team</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+        </ul>
+        
         <div class="dark-mode-toggle" onclick="toggleDarkMode()">
             <i class="fas fa-moon"></i>
         </div>
-    </header>
+    </nav>
+</header>
 
     <section class="page-hero">
         <h1>About Techno Globe Center SA</h1>
@@ -46,11 +52,7 @@
                     <li><strong>Tax No:</strong> 9449340174</li>
                     <li><strong>CSD Registration No:</strong> MAAA0247996</li>
                     <li><strong>CIDB CRS No:</strong> 10204232 (GD Level: 1CE)</li>
-                    <li><strong>Microsoft Partner ID:</strong> 6336787</li>
-                </ul>
-            </div>
-            <div class="about-image">
-                <img src="../images/about-company.jpg" alt="TGC SA Team">
+                    <li><strong>Microsoft Partner ID:</strong> 6336787</li>                </ul>
             </div>
         </div>
     </section>
@@ -133,11 +135,11 @@
             <div class="footer-column">
                 <h3>Quick Links</h3>
                 <a href="../index.html">Home</a>
-                <a href="services.html">Services</a>
-                <a href="partners.html">Partners</a>
-                <a href="about.html">About</a>
-                <a href="team.html">Team</a>
-                <a href="contact.html">Contact</a>
+                <a href="./services.html">Services</a>
+                <a href="./partners.html">Partners</a>
+                <a href="./about.html">About</a>
+                <a href="./team.html">Team</a>
+                <a href="./contact.html">Contact</a>
             </div>
             <div class="footer-column">
                 <h3>Contact Us</h3>
