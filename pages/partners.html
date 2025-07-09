@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,26 +8,33 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-    <header>
+     <header>
+    <nav>
         <div class="logo-container">
+            <button class="menu-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
             <div class="logo-img">TGC SA</div>
             <div class="logo-text">Techno Globe Center SA</div>
         </div>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="partners.html" class="active">Partners</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="team.html">Team</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
+        
+        <ul id="nav-list">            <li><a href="../index.html">Home</a></li>
+            <li><a href="./services.html">Services</a></li>
+            <li><a href="./partners.html" class="active">Partners</a></li>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./team.html">Team</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+        </ul>
+        
         <div class="dark-mode-toggle" onclick="toggleDarkMode()">
             <i class="fas fa-moon"></i>
         </div>
-    </header>
+    </nav>
+</header>
 
     <section class="page-hero">
         <h1>Our Strategic Partnerships</h1>
@@ -38,58 +46,57 @@
             <h2>Technology Partners</h2>
             <p>We collaborate with leading global technology providers</p>
         </div>
-        
+
         <div class="partners-grid">
-            <div class="partner-card">
-                <div class="partner-logo dell">
-                    <img src="../images/dell-logo.png" alt="Dell Logo" class="partner-logo">
+            <div class="partner-card">                <div class="partner-logo dell">
+                    <img src="../images/dell.png" alt="Dell Logo" class="partner-logo">
                 </div>
                 <h3>Dell Technologies</h3>
                 <p>Advanced hardware solutions including storage, servers, and networking infrastructure.</p>
             </div>
-            
+
             <div class="partner-card">
                 <div class="partner-logo hp">
-                    <img src="../images/hp-logo.png" alt="HP Logo" class="partner-logo">
+                    <img src="../images/hp.png" alt="HP Logo" class="partner-logo">
                 </div>
                 <h3>HP Inc.</h3>
                 <p>High-performance computing devices, printers, and enterprise accessories.</p>
             </div>
-            
+
             <div class="partner-card">
                 <div class="partner-logo huawei">
-                    <img src="../images/huawei-logo.png" alt="Huawei Logo" class="partner-logo">
+                    <img src="../images/huawei.png" alt="Huawei Logo" class="partner-logo">
                 </div>
                 <h3>Huawei</h3>
                 <p>Cloud solutions, IT monitoring, and robust infrastructure services.</p>
             </div>
-            
+
             <div class="partner-card">
                 <div class="partner-logo microsoft">
-                    <img src="../images/microsoft-logo.png" alt="Microsoft Logo" class="partner-logo">
+                    <img src="../images/microsoft.png" alt="Microsoft Logo" class="partner-logo">
                 </div>
                 <h3>Microsoft</h3>
                 <p>Enterprise software, cloud solutions, and productivity tools including Azure and Office 365.</p>
             </div>
-            
+
             <div class="partner-card">
                 <div class="partner-logo lenovo">
-                    <img src="../images/lenovo-logo.png" alt="Lenovo Logo" class="partner-logo">
+                    <img src="../images/lenovo.png" alt="Lenovo Logo" class="partner-logo">
                 </div>
-                
+
                 <h3>Lenovo</h3>
                 <p>Workstations, desktops, and high-performance laptops for enterprise needs.</p>
             </div>
-            
+
             <div class="partner-card">
                 <div class="partner-logo vmware"></div>
                 <h3>VMware</h3>
                 <p>Virtualized hosting, server infrastructure, and scalable IT solutions.</p>
             </div>
-            
+
             <div class="partner-card">
-                <div class="partner-logo acer"> <img src="../images/acer-logo.png" alt="Acer Logo" class="partner-logo">
-               </div>
+                <div class="partner-logo acer"> <img src="../images/acer.png" alt="Acer Logo" class="partner-logo">
+                </div>
                 <h3>Acer</h3>
                 <p>Enterprise-grade hardware solutions tailored for diverse business requirements.</p>
             </div>
@@ -99,7 +106,7 @@
             <h2>Industry Collaborations</h2>
             <p>Strategic partnerships with key ICT service providers</p>
         </div>
-        
+
         <div class="collaborations-list">
             <div class="collaboration-item">Sizwe Africa IT Group (Pty) Ltd</div>
             <div class="collaboration-item">CallTech Technologies (Pty) Ltd</div>
@@ -148,7 +155,7 @@
             <p>&copy; 2024 Techno Globe Center SA (PTY) LTD. All rights reserved.</p>
         </div>
     </footer>
-
     <script src="../js/scripts.js"></script>
 </body>
+
 </html>

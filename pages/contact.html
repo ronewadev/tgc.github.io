@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,26 +8,34 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-    <header>
+   <header>
+    <nav>
         <div class="logo-container">
+            <button class="menu-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
             <div class="logo-img">TGC SA</div>
             <div class="logo-text">Techno Globe Center SA</div>
         </div>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="partners.html">Partners</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="team.html" class="active">Team</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
+        
+        <ul id="nav-list">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+        
         <div class="dark-mode-toggle" onclick="toggleDarkMode()">
             <i class="fas fa-moon"></i>
         </div>
-    </header>
+    </nav>
+</header>
 
     <section class="page-hero">
         <h1>Meet Our Team</h1>
@@ -38,14 +47,15 @@
             <h2>Leadership Team</h2>
             <p>Our experienced leaders guiding TGC SA's vision and strategy</p>
         </div>
-        
+
         <div class="team-grid">
             <div class="team-member">
                 <div class="member-photo" style="background-color: #3b82f6;">AS</div>
                 <h3>Aubrey Sithole</h3>
                 <p class="position">Managing Director</p>
                 <p class="email">aubrey@tgc-sa.co.za</p>
-                <p class="bio">With over 15 years in the ICT industry, Aubrey provides strategic direction and oversees all company operations.</p>
+                <p class="bio">With over 15 years in the ICT industry, Aubrey provides strategic direction and oversees
+                    all company operations.</p>
             </div>
         </div>
 
@@ -53,14 +63,15 @@
             <h2>Our Expert Teams</h2>
             <p>Specialized teams delivering excellence across all our services</p>
         </div>
-        
+
         <div class="team-categories">
             <div class="team-category">
                 <div class="team-category-icon">
                     <i class="fas fa-chart-line"></i>
                 </div>
                 <h3>Business Consulting</h3>
-                <p>Our consulting team helps clients align technology with business objectives through strategic advisory services.</p>
+                <p>Our consulting team helps clients align technology with business objectives through strategic
+                    advisory services.</p>
                 <div class="team-members">
                     <div class="team-member">
                         <div class="member-photo" style="background-color: #10b981;">AK</div>
@@ -69,7 +80,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="team-category">
                 <div class="team-category-icon">
                     <i class="fas fa-cloud"></i>
@@ -84,7 +95,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="team-category">
                 <div class="team-category-icon">
                     <i class="fas fa-shield-alt"></i>
@@ -99,7 +110,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="team-category">
                 <div class="team-category-icon">
                     <i class="fas fa-code"></i>
@@ -119,7 +130,8 @@
 
     <section class="join-team">
         <h2>Join Our Growing Team</h2>
-        <p>We're always looking for talented ICT professionals to join our team. Check our current openings or send us your CV.</p>
+        <p>We're always looking for talented ICT professionals to join our team. Check our current openings or send us
+            your CV.</p>
         <a href="contact.html" class="btn btn-primary">Career Opportunities</a>
     </section>
 
@@ -158,4 +170,5 @@
 
     <script src="../js/scripts.js"></script>
 </body>
+
 </html>
