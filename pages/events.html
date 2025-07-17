@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events & Programs - Techno Globe Center SA (TGC SA)</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Events & Programs Section --- */
+.events-section {
+    padding: 60px 20px 40px 20px;
+    background: linear-gradient(135deg, #f0f6ff 60%, #e3f2fd 100%);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(37, 99, 235, 0.07), 0 1.5px 8px rgba(30, 64, 175, 0.04);
+    margin: 40px auto 60px auto;
+    max-width: 1200px;
+    position: relative;
+    overflow: hidden;
+}
+
+body.dark-mode .events-section {
+    background: linear-gradient(135deg, #0a192f 60%, #1e293b 100%);
+    box-shadow: 0 8px 32px rgba(30, 64, 175, 0.13), 0 1.5px 8px rgba(37, 99, 235, 0.09);
+}
+
+.events-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.events-intro {
+    flex: 2 1 340px;
+    min-width: 280px;
+    max-width: 700px;
+}
+
+.events-intro h2 {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 18px;
+    letter-spacing: -1px;
+}
+
+body.dark-mode .events-intro h2 {
+    color: #60a5fa;
+}
+
+.events-intro p {
+    font-size: 1.15rem;
+    color: #444;
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+body.dark-mode .events-intro p {
+    color: #e0e7ef;
+}
+
+.upcoming-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 18px rgba(37,99,235,0.07);
+    padding: 28px 24px;
+    min-width: 240px;
+    max-width: 340px;
+    flex: 1 1 240px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    transition: box-shadow 0.3s;
+}
+
+body.dark-mode .upcoming-card {
+    background: #1e293b;
+    box-shadow: 0 4px 18px rgba(59,130,246,0.13);
+}
+
+.upcoming-card h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+body.dark-mode .upcoming-card h3 {
+    color: #60a5fa;
+}
+
+.upcoming-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.upcoming-card li {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 10px;
+    padding-left: 0;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 10px;
+    background: rgba(37,99,235,0.03);
+    border-radius: 4px;
+}
+
+body.dark-mode .upcoming-card li {
+    color: #e0e7ef;
+    background: rgba(59,130,246,0.07);
+    border-left: 3px solid #60a5fa;
+}
+
+.events-section::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, #2563eb33 0%, transparent 70%);
+    z-index: 0;
+}
+
+.events-section::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    left: -40px;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, #3b82f633 0%, transparent 70%);
+    z-index: 0;
+}
+
+/* Programs & Sponsorships Section */
+.programs-container {
+    max-width: 1200px;
+    margin: 60px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.program-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-top: 4px solid var(--primary-color);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+body.dark-mode .program-card {
+    background: #1e293b;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    border-top: 4px solid #60a5fa;
+}
+
+.program-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 32px rgba(37, 99, 235, 0.15);
+}
+
+body.dark-mode .program-card:hover {
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.25);
+}
+
+.program-card h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+body.dark-mode .program-card h3 {
+    color: #60a5fa;
+}
+
+.program-card .program-type {
+    display: inline-block;
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary-color);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+body.dark-mode .program-card .program-type {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+}
+
+.program-card p {
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+body.dark-mode .program-card p {
+    color: #e0e7ef;
+}
+
+.program-card .program-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.program-meta-item {
+    display: flex;
+    align-items: center;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+body.dark-mode .program-meta-item {
+    color: #cbd5e1;
+}
+
+.program-meta-item i {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+.learn-more-btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+    align-self: flex-start;
+}
+
+.learn-more-btn:hover {
+    background-color: #1e40af;
+}
+
+/* Event Gallery Section */
+.event-gallery {
+    max-width: 1200px;
+    margin: 60px auto;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    aspect-ratio: 16/9;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    padding: 20px;
+}
+
+.gallery-caption h4 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.gallery-caption p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Sponsorship Form Section */
+.sponsorship-section {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 40px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+body.dark-mode .sponsorship-section {
+    background: #1e293b;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.sponsorship-section h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+body.dark-mode .sponsorship-section h2 {
+    color: #60a5fa;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+body.dark-mode .form-group label {
+    color: #e0e7ef;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea,
+body.dark-mode .form-group select {
+    background: #0f172a;
+    border-color: #334155;
+    color: #e0e7ef;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.submit-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #1e40af;
+}
+
+@media (max-width: 900px) {
+    .events-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .events-intro, .upcoming-card {
+        max-width: 100%;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .events-section {
+        padding: 30px 8px 20px 8px;
+        border-radius: 12px;
+    }
+    .events-intro h2 {
+        font-size: 1.5rem;
+    }
+    .upcoming-card {
+        padding: 18px 10px;
+        border-radius: 10px;
+    }
+    
+    .programs-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .sponsorship-section {
+        padding: 20px;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <button class="menu-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <div class="logo-img">TGC SA</div>
+                <div class="logo-text">Techno Globe Center SA</div>
+            </div>
+            <ul id="nav-list">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="./services.html">Services</a></li>
+                <li><a href="./partners.html">Partners</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./careers.html">Careers</a></li>
+                <li><a href="./events.html" class="active">Events & Programs</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="dark-mode-toggle" onclick="toggleDarkMode()">
+                <i class="fas fa-moon"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <h1>Events, Sponsorships & Programs</h1>
+        <p>Engaging with our community through impactful initiatives and partnerships</p>
+    </section>
+
+    <section class="events-section">
+        <div class="events-container">
+            <div class="events-intro">
+                <h2>Our Community Engagement</h2>
+                <p>At Techno Globe Center SA, we're committed to fostering growth and innovation through various events, sponsorships, and development programs. These initiatives reflect our dedication to knowledge sharing, community development, and industry advancement.</p>
+                <p>From tech conferences to youth development programs, we create platforms that inspire, educate, and connect people across the ICT ecosystem. Explore our upcoming events and discover how you can participate or partner with us.</p>
+            </div>
+            <div class="upcoming-card">
+                <h3>Upcoming Events</h3>
+                <ul>
+                    <li><strong>Tech Innovation Summit</strong> - August 15-16, 2024</li>
+                    <li><strong>Women in ICT Conference</strong> - September 5, 2024</li>
+                    <li><strong>Annual Hackathon</strong> - October 12-13, 2024</li>
+                    <li><strong>Digital Skills Workshop</strong> - Monthly sessions</li>
+                    <li><strong>Cloud Computing Masterclass</strong> - November 8, 2024</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="programs-container">
+        <div class="program-card">
+            <span class="program-type">EDUCATION PROGRAM</span>
+            <h3>ICT Youth Development Initiative</h3>
+            <p>Our flagship program designed to equip young South Africans with essential digital skills. Through partnerships with schools and community centers, we provide training in coding, cybersecurity, and cloud computing.</p>
+            <div class="program-meta">
+                <div class="program-meta-item"><i class="fas fa-users"></i> 500+ Graduates</div>
+                <div class="program-meta-item"><i class="fas fa-map-marker-alt"></i> Nationwide</div>
+            </div>
+            <a href="#" class="learn-more-btn">Learn More</a>
+        </div>
+        
+        <div class="program-card">
+            <span class="program-type">SPONSORSHIP</span>
+            <h3>Tech Startup Incubator</h3>
+            <p>We sponsor promising tech startups with funding, mentorship, and infrastructure support. Our incubator program has helped launch 30+ tech businesses in the past three years.</p>
+            <div class="program-meta">
+                <div class="program-meta-item"><i class="fas fa-calendar-alt"></i> Annual Program</div>
+                <div class="program-meta-item"><i class="fas fa-clock"></i> Applications Open</div>
+            </div>
+            <a href="#" class="learn-more-btn">Apply Now</a>
+        </div>
+        
+        <div class="program-card">
+            <span class="program-type">COMMUNITY EVENT</span>
+            <h3>Digital Inclusion Campaign</h3>
+            <p>Bringing technology access to underserved communities through mobile computer labs and free WiFi zones. Our teams provide basic digital literacy training to help bridge the digital divide.</p>
+            <div class="program-meta">
+                <div class="program-meta-item"><i class="fas fa-chart-line"></i> 15 Communities Reached</div>
+                <div class="program-meta-item"><i class="fas fa-user-graduate"></i> 2000+ Trained</div>
+            </div>
+            <a href="#" class="learn-more-btn">Get Involved</a>
+        </div>
+    </section>
+
+    <section class="event-gallery">
+        <h2 class="section-title">Event Gallery</h2>
+        <p>Highlights from our recent events and programs</p>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Tech Conference">
+                <div class="gallery-caption">
+                    <h4>2023 Tech Innovation Summit</h4>
+                    <p>Keynote speakers and panel discussions</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Workshop">
+                <div class="gallery-caption">
+                    <h4>Digital Skills Workshop</h4>
+                    <p>Hands-on training session</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Team Meeting">
+                <div class="gallery-caption">
+                    <h4>Startup Pitch Day</h4>
+                    <p>Entrepreneurs presenting their ideas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sponsorship-section">
+        <h2>Become a Sponsor or Partner</h2>
+        <p>Join us in making a difference through technology education and innovation. We welcome corporate sponsors and community partners for our events and programs.</p>
+        
+        <form id="sponsorship-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="org-name">Organization Name</label>
+                    <input type="text" id="org-name" name="org-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-person">Contact Person</label>
+                    <input type="text" id="contact-person" name="contact-person" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="sponsor-email">Email Address</label>
+                <input type="email" id="sponsor-email" name="sponsor-email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="sponsor-phone">Phone Number</label>
+                <input type="tel" id="sponsor-phone" name="sponsor-phone" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="interest-area">Area of Interest</label>
+                <select id="interest-area" name="interest-area" required>
+                    <option value="">Select an option</option>
+                    <option value="Event Sponsorship">Event Sponsorship</option>
+                    <option value="Program Partnership">Program Partnership</option>
+                    <option value="Scholarship Funding">Scholarship Funding</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="sponsor-message">Your Message</label>
+                <textarea id="sponsor-message" name="sponsor-message" rows="5" placeholder="Tell us about your organization and how you'd like to collaborate..."></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Submit Inquiry</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Techno Globe Center SA</h3>
+                <p>Providing innovative ICT solutions since 2013. We help businesses grow through technology.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="../index.html">Home</a>
+                <a href="./services.html">Services</a>
+                <a href="./partners.html">Partners</a>
+                <a href="./about.html">About</a>
+                <a href="./careers.html">Careers</a>
+                <a href="./events.html">Events & Programs</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 14 South Road, Walkerville, 1961</p>
+                <p><i class="fas fa-phone"></i> +27 61 549 0358</p>
+                <p><i class="fas fa-envelope"></i> info@tgc-sa.co.za</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 Techno Globe Center SA (PTY) LTD. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/scripts.js"></script>
+    <script>
+        // Form submission handling
+        document.getElementById('sponsorship-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Here you would typically send the form data to your server
+            // For now, we'll just show a success message
+            alert('Thank you for your sponsorship inquiry! Our team will contact you within 2 business days to discuss opportunities.');
+            
+            // Reset the form
+            this.reset();
+        });
+    </script>
+</body>
+</html>
