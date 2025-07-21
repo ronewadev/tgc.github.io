@@ -1299,11 +1299,6 @@ footer {
         width: 95%;
     }
 
-    nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
     .hero {
         padding: 80px 20px;
     }
