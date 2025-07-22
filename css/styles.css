@@ -2060,6 +2060,9 @@ body.dark-mode .map-section {
     }
 }
 
+.hero-subtitle {
+    color: #fff !important;
+}
 /* --- Company Overview Section --- */
 .company-overview-section {
     padding: 60px 20px 40px 20px;
