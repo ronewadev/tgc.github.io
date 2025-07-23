@@ -1,171 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Techno Globe Center SA (TGC SA)</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* --- Company Overview Section --- */
-.company-overview-section {
-    padding: 60px 20px 40px 20px;
-    background: linear-gradient(135deg, #f0f6ff 60%, #e3f2fd 100%);
-    border-radius: 24px;
-    box-shadow: 0 8px 32px rgba(37, 99, 235, 0.07), 0 1.5px 8px rgba(30, 64, 175, 0.04);
-    margin: 40px auto 60px auto;
-    max-width: 1200px;
-    position: relative;
-    overflow: hidden;
-}
 
-body.dark-mode .company-overview-section {
-    background: linear-gradient(135deg, #0a192f 60%, #1e293b 100%);
-    box-shadow: 0 8px 32px rgba(30, 64, 175, 0.13), 0 1.5px 8px rgba(37, 99, 235, 0.09);
-}
-
-.company-overview-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    align-items: flex-start;
-    justify-content: space-between;
-}
-
-.company-overview-text {
-    flex: 2 1 340px;
-    min-width: 280px;
-    max-width: 700px;
-}
-
-.company-overview-text h2 {
-    font-size: 2.3rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 18px;
-    letter-spacing: -1px;
-}
-
-body.dark-mode .company-overview-text h2 {
-    color: #60a5fa;
-}
-
-.company-overview-text p {
-    font-size: 1.15rem;
-    color: #444;
-    line-height: 1.8;
-    margin-bottom: 24px;
-}
-
-body.dark-mode .company-overview-text p {
-    color: #e0e7ef;
-}
-
-.company-credentials {
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 4px 18px rgba(37,99,235,0.07);
-    padding: 28px 24px;
-    min-width: 240px;
-    max-width: 340px;
-    flex: 1 1 240px;
-    margin-top: 12px;
-    margin-bottom: 12px;
-    transition: box-shadow 0.3s;
-}
-
-body.dark-mode .company-credentials {
-    background: #1e293b;
-    box-shadow: 0 4px 18px rgba(59,130,246,0.13);
-}
-
-.company-credentials h3 {
-    font-size: 1.2rem;
-    color: var(--primary-color);
-    margin-bottom: 16px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-body.dark-mode .company-credentials h3 {
-    color: #60a5fa;
-}
-
-.company-credentials ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.company-credentials li {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 10px;
-    padding-left: 0;
-    border-left: 3px solid var(--primary-color);
-    padding-left: 10px;
-    background: rgba(37,99,235,0.03);
-    border-radius: 4px;
-}
-
-body.dark-mode .company-credentials li {
-    color: #e0e7ef;
-    background: rgba(59,130,246,0.07);
-    border-left: 3px solid #60a5fa;
-}
-
-.company-overview-section::before {
-    content: '';
-    position: absolute;
-    top: -60px;
-    right: -60px;
-    width: 180px;
-    height: 180px;
-    background: radial-gradient(circle, #2563eb33 0%, transparent 70%);
-    z-index: 0;
-}
-
-.company-overview-section::after {
-    content: '';
-    position: absolute;
-    bottom: -40px;
-    left: -40px;
-    width: 120px;
-    height: 120px;
-    background: radial-gradient(circle, #3b82f633 0%, transparent 70%);
-    z-index: 0;
-}
-
-@media (max-width: 900px) {
-    .company-overview-container {
-        flex-direction: column;
-        gap: 30px;
-    }
-    .company-overview-text, .company-credentials {
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 576px) {
-    .company-overview-section {
-        padding: 30px 8px 20px 8px;
-        border-radius: 12px;
-    }
-    .company-overview-text h2 {
-        font-size: 1.5rem;
-    }
-    .company-credentials {
-        padding: 18px 10px;
-        border-radius: 10px;
-    }
-}
-    </style>
 </head>
-
 <body>
-    <div class="container">
-        <header>
+    <header>
     <nav>
         <div class="logo-container">
             <button class="menu-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
@@ -173,18 +17,16 @@ body.dark-mode .company-credentials li {
                 <span class="bar"></span>
                 <span class="bar"></span>
             </button>
-           <img src="../images/tgc_logo1.png" alt="TGC SA Logo" class="logo-img" />
-                <div class="logo-text-group">
-                   <h1 class="logo-title">Techno Globe Center</h1>
-                   <span class="logo-slogan-text">Technology Stimulates Creativity and Innovation</span>
-                </div>
+             <div class="logo-img"><img src="../images/tgc_Logo.png" class="logo"></div>
+            <div class="logo-text"><img src="../images/tgc_slogan1.png" class="tagline"></div>
         </div>
           <ul id="nav-list">
             <li><a href="../index.html">Home</a></li>
+            <li><a href="./careers.html">Careers</a></li>
+            <li><a href="./events.html">Programs</a></li>
             <li><a href="./services.html">Services</a></li>
             <li><a href="./partners.html">Partners</a></li>
             <li><a href="./about.html" class="active">About</a></li>
-            <!-- <li><a href="./team.html">Team</a></li> -->
             <li><a href="./contact.html">Contact</a></li>
         </ul>
         
@@ -193,136 +35,129 @@ body.dark-mode .company-credentials li {
         </div>
     </nav>
 </header>
-        <section class="page-hero">
-            <div class="section-title">
-                <h1>About Techno Globe Center SA</h1>
-                <p>Empowering businesses through innovative ICT solutions since 2013</p>
-            </div>
-        </section>
 
-        <section class="about-section">
-            <div class="about-container">
-                <div class="about-content">
-                    <div class="section-title">
-                        <h2>Company Overview</h2>
-                    </div>
-                    <p>Techno Globe Center SA (TGC SA) is a dynamic and innovative Information and Communication Technology (ICT) company committed to delivering cutting-edge solutions that empower businesses across both the public and private sectors worldwide. With a strong foundation in technology and industry expertise, we provide strategic digital transformation, cloud computing, and cybersecurity solutions to help organizations thrive in an ever-evolving digital landscape.</p>
-                    <div class="section-title">
-                        <h2>Our Credentials</h2>
-                    </div>
-                    <div class="collaborations-grid">
-                        <div class="collaboration-item"><strong>Company Registration No:</strong> 2013/138177/07</div>
-                        <div class="collaboration-item"><strong>B-BBEE Level:</strong> 1</div>
-                        <div class="collaboration-item"><strong>Tax No:</strong> 9449340174</div>
-                        <div class="collaboration-item"><strong>CSD Registration No:</strong> MAAA0247996</div>
-                        <div class="collaboration-item"><strong>CIDB CRS No:</strong> 10204232 (GD Level: 1CE)</div>
-                        <div class="collaboration-item"><strong>Microsoft Partner ID:</strong> 6336787</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section class="page-hero">
+        <h1>About Techno Globe Center SA</h1>
+        <p>Empowering businesses through innovative ICT solutions since 2013</p>
+    </section>
 
-        <section class="values-section">
-            <div class="section-title">
-                <h2>Our Core Values</h2>
-            </div>
-            <div class="values-container">
-                <div class="value-card">
-                    <h3><i class="fas fa-user-tie"></i> Customer Focus</h3>
-                    <p>We put our clients at the center of everything we do, understanding their unique needs and delivering tailored solutions that drive real business value.</p>
-                </div>
-                <div class="value-card">
-                    <h3><i class="fas fa-lightbulb"></i> Innovation</h3>
-                    <p>We continuously explore emerging technologies and creative approaches to solve complex business challenges in transformative ways.</p>
-                </div>
-                <div class="value-card">
-                    <h3><i class="fas fa-handshake"></i> Integrity</h3>
-                    <p>We conduct our business with honesty, transparency, and ethical practices, building trust through every interaction.</p>
-                </div>
-                <div class="value-card">
-                    <h3><i class="fas fa-chart-line"></i> Excellence</h3>
-                    <p>We strive for the highest standards in all our services, ensuring quality, reliability, and measurable results for our clients.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="history-section">
-            <div class="section-title">
-                <h2>Our Journey</h2>
-            </div>
-            <div class="timeline">
-                <div class="timeline-event">
-                    <div class="event-date">2013</div>
-                    <div class="event-content">
-                        <h3>Company Founded</h3>
-                        <p>Techno Globe Center SA was established with a vision to transform the South African ICT landscape.</p>
-                    </div>
-                </div>
-                <div class="timeline-event">
-                    <div class="event-date">2015</div>
-                    <div class="event-content">
-                        <h3>First Major Contracts</h3>
-                        <p>Secured contracts with government agencies and private sector clients, establishing our reputation.</p>
-                    </div>
-                </div>
-                <div class="timeline-event">
-                    <div class="event-date">2018</div>
-                    <div class="event-content">
-                        <h3>Cloud Solutions Expansion</h3>
-                        <p>Launched our cloud services division and became a Huawei Cloud Solutions Partner.</p>
-                    </div>
-                </div>
-                <div class="timeline-event">
-                    <div class="event-date">2021</div>
-                    <div class="event-content">
-                        <h3>B-BBEE Level 1 Achievement</h3>
-                        <p>Attained Level 1 B-BBEE status, demonstrating our commitment to transformation.</p>
-                    </div>
-                </div>
-                <div class="timeline-event">
-                    <div class="event-date">2024</div>
-                    <div class="event-content">
-                        <h3>Current Operations</h3>
-                        <p>Serving clients across multiple industries with a growing team of ICT professionals and expanded service offerings.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Techno Globe Center SA</h3>
-                    <p>Providing innovative ICT solutions since 2013. We help businesses grow through technology.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <a href="../index.html">Home</a>
-                    <a href="./services.html">Services</a>
-                    <a href="./partners.html">Partners</a>
-                    <a href="./about.html">About</a>
-                    <a href="./team.html">Team</a>
-                    <a href="./contact.html">Contact</a>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 14 South Road, Walkerville, 1961</p>
-                    <p><i class="fas fa-phone"></i> +27 61 549 0358</p>
-                    <p><i class="fas fa-envelope"></i> info@tgc-sa.co.za</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2024 Techno Globe Center SA (PTY) LTD. All rights reserved.</p>
-            </div>
-        </footer>
+<section class="company-overview-section">
+  <div class="company-overview-container">
+    <div class="company-overview-text">
+      <h2>Company Overview</h2>
+      <p>Techno Globe Center SA (TGC SA) is a dynamic and innovative Information and Communication Technology (ICT) company committed to delivering cutting-edge solutions that empower businesses across both the public and private sectors worldwide. With a strong foundation in technology and industry expertise, we provide strategic digital transformation, cloud computing, and cybersecurity solutions to help organizations thrive in an ever-evolving digital landscape.</p>
     </div>
+    <div class="company-credentials">
+      <h3>Our Credentials</h3>
+      <ul>
+        <li><strong>Company Registration No:</strong> 2013/138177/07</li>
+        <li><strong>B-BBEE Level:</strong> 1</li>
+        <li><strong>Tax No:</strong> 9449340174</li>
+        <li><strong>CSD Registration No:</strong> MAAA0247996</li>
+        <li><strong>CIDB CRS No:</strong> 10204232 (GD Level: 1CE)</li>
+        <li><strong>Microsoft Partner ID:</strong> 6336787</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+    <section class="values-section">
+        <h2>Our Core Values</h2>
+        <div class="values-container">
+            <div class="value-card">
+                <h3><i class="fas fa-user-tie"></i> Customer Focus</h3>
+                <p>We put our clients at the center of everything we do, understanding their unique needs and delivering tailored solutions that drive real business value.</p>
+            </div>
+            <div class="value-card">
+                <h3><i class="fas fa-lightbulb"></i> Innovation</h3>
+                <p>We continuously explore emerging technologies and creative approaches to solve complex business challenges in transformative ways.</p>
+            </div>
+            <div class="value-card">
+                <h3><i class="fas fa-handshake"></i> Integrity</h3>
+                <p>We conduct our business with honesty, transparency, and ethical practices, building trust through every interaction.</p>
+            </div>
+            <div class="value-card">
+                <h3><i class="fas fa-chart-line"></i> Excellence</h3>
+                <p>We strive for the highest standards in all our services, ensuring quality, reliability, and measurable results for our clients.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="history-section">
+        <h2>Our Journey</h2>
+        <div class="timeline">
+            <div class="timeline-event">
+                <div class="event-date">2013</div>
+                <div class="event-content">
+                    <h3>Company Founded</h3>
+                    <p>Techno Globe Center SA was established with a vision to transform the South African ICT landscape.</p>
+                </div>
+            </div>
+            <div class="timeline-event">
+                <div class="event-date">2015</div>
+                <div class="event-content">
+                    <h3>First Major Contracts</h3>
+                    <p>Secured contracts with government agencies and private sector clients, establishing our reputation.</p>
+                </div>
+            </div>
+            <div class="timeline-event">
+                <div class="event-date">2018</div>
+                <div class="event-content">
+                    <h3>Cloud Solutions Expansion</h3>
+                    <p>Launched our cloud services division and became a Huawei Cloud Solutions Partner.</p>
+                </div>
+            </div>
+            <div class="timeline-event">
+                <div class="event-date">2021</div>
+                <div class="event-content">
+                    <h3>B-BBEE Level 1 Achievement</h3>
+                    <p>Attained Level 1 B-BBEE status, demonstrating our commitment to transformation.</p>
+                </div>
+            </div>
+            <div class="timeline-event">
+                <div class="event-date">2024</div>
+                <div class="event-content">
+                    <h3>Current Operations</h3>
+                    <p>Serving clients across multiple industries with a growing team of ICT professionals and expanded service offerings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Techno Globe Center SA</h3>
+                <p>Providing innovative ICT solutions since 2013. We help businesses grow through technology.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="../index.html">Home</a>
+                <a href="careers.html">Careers</a>
+                <a href="events.html">Programs</a>
+                <a href="services.html">Services</a>
+                <a href="partners.html">Partners</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 14 South Road, Walkerville, 1961</p>
+                <p><i class="fas fa-phone"></i> +27 61 549 0358</p>
+                <p><i class="fas fa-envelope"></i> info@tgc-sa.co.za</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 Techno Globe Center SA (PTY) LTD. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script src="../js/scripts.js"></script>
 </body>
-
- </html>
+</html>
