@@ -185,8 +185,15 @@ nav ul li a:hover::after {
 /* Responsive Navigation */
 @media (max-width: 900px) {
     .menu-toggle {
-        display: flex;
+        display: flex
+;
+        color: white;
+        background: white;
+        padding-right: 8px;
+        border-radius: 5px;
+        padding-left: 8px;
     }
+
       nav {
         position: relative;
     }
