@@ -30,8 +30,6 @@ body {
     color: var(--text-light);
     transition: var(--transition);
     overflow-x: hidden;
-    margin-left: 2rem;
-    margin-right: 2rem;
 }
 
 body.dark-mode {
@@ -1440,7 +1438,7 @@ body.dark-mode .client-logo-container {
         display: flex;
         gap: 20px;
         padding: 0 8px;
-        animation: clients-slide 20s linear infinite !important;
+        animation: clients-slide 30s linear infinite !important;
     }
     .client-logo-container {
         width: 100px;
