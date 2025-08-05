@@ -26,7 +26,7 @@ img.logo {
 }
 
 body {
-  
+    padding-top: 100px; /* Adjust if your header is taller/shorter */
     color: var(--text-light);
     transition: var(--transition);
     overflow-x: hidden;
@@ -39,16 +39,16 @@ body.dark-mode {
 
 /* Header Styles */
 header {
-    width: 90%;
-    max-width: 1400px;
     margin: 20px auto;
     background: var(--glass-light);
     backdrop-filter: blur(10px);
     padding: 15px 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
-    position: sticky;
-    top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     z-index: 1000;
     transition: var(--transition);
 }
@@ -92,6 +92,9 @@ nav ul {
     list-style: none;
     display: flex;
     gap: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 nav ul li a {
@@ -771,6 +774,16 @@ body.dark-mode .form-group select {
         flex-direction: column;
         gap: 0;
     }
+    header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  body {
+    padding-top: 100px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -1718,7 +1731,6 @@ footer {
         flex-direction: column;
         padding: 15px;
         gap: 15px;
-        width: 95%;
     }
 
     nav ul {
@@ -3026,12 +3038,18 @@ body.dark-mode .company-credentials li {
     }
 }
 
+.main-container {
+    margin: 0px 20px;
+}
     /* Contact Section */
     .contact-container {
+      display: flex;
       max-width: 1200px;
       margin: 2rem auto;
       padding: 0 1rem;
+      flex-direction: column;
     }
+    
 
     .contact-intro {
       text-align: center;

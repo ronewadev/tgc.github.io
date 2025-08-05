@@ -4,6 +4,7 @@
   "description": "This repository contains the source code for the TGC website, a professional corporate website showcasing our services, team, and partnerships.",
   "main": "index.js",
   "scripts": {
+    "build": "ng build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
