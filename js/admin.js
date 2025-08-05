@@ -1,3 +1,6 @@
+import { auth } from './firebase.js';
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 document.addEventListener('DOMContentLoaded', function() {
     checkAuth();
     setupTabs();
@@ -297,3 +300,16 @@ function logout() {
 document.getElementById('job-filter').addEventListener('change', function() {
     loadApplications(this.value);
 });
+
+// Example login function
+function loginAdmin(email, password) {
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      // Check if user is admin (optional: check Firestore for admin role)
+    })
+    .catch((error) => {
+      // Handle errors
+    });
+}

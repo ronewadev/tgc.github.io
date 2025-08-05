@@ -6,7 +6,6 @@
     <title>Events & Programs - Techno Globe Center SA (TGC SA)</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   
 </head>
 <body>
     <header>
@@ -41,138 +40,76 @@
     </section>
 
     <div class="main-container">
-    <section class="events-section">
-        <div class="events-container">
-            <div class="events-intro">
-                <h2>Our Community Engagement</h2>
-                <p>At Techno Globe Center SA, we're committed to fostering growth and innovation through various events, sponsorships, and development programs. These initiatives reflect our dedication to knowledge sharing, community development, and industry advancement.</p>
-                <p>From tech conferences to youth development programs, we create platforms that inspire, educate, and connect people across the ICT ecosystem. Explore our upcoming events and discover how you can participate or partner with us.</p>
-            </div>
-            <div class="upcoming-card">
-                <h3>Upcoming Events</h3>
-                <ul>
-                    <li><strong>Tech Innovation Summit</strong> - August 15-16, 2024</li>
-                    <li><strong>Women in ICT Conference</strong> - September 5, 2024</li>
-                    <li><strong>Annual Hackathon</strong> - October 12-13, 2024</li>
-                    <li><strong>Digital Skills Workshop</strong> - Monthly sessions</li>
-                    <li><strong>Cloud Computing Masterclass</strong> - November 8, 2024</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section class="programs-container">
-        <div class="program-card">
-            <span class="program-type">EDUCATION PROGRAM</span>
-            <h3>ICT Youth Development Initiative</h3>
-            <p>Our flagship program designed to equip young South Africans with essential digital skills. Through partnerships with schools and community centers, we provide training in coding, cybersecurity, and cloud computing.</p>
-            <div class="program-meta">
-                <div class="program-meta-item"><i class="fas fa-users"></i> 500+ Graduates</div>
-                <div class="program-meta-item"><i class="fas fa-map-marker-alt"></i> Nationwide</div>
-            </div>
-            <a href="#" class="learn-more-btn">Learn More</a>
-        </div>
-        
-        <div class="program-card">
-            <span class="program-type">SPONSORSHIP</span>
-            <h3>Tech Startup Incubator</h3>
-            <p>We sponsor promising tech startups with funding, mentorship, and infrastructure support. Our incubator program has helped launch 30+ tech businesses in the past three years.</p>
-            <div class="program-meta">
-                <div class="program-meta-item"><i class="fas fa-calendar-alt"></i> Annual Program</div>
-                <div class="program-meta-item"><i class="fas fa-clock"></i> Applications Open</div>
-            </div>
-            <a href="#" class="learn-more-btn">Apply Now</a>
-        </div>
-        
-        <div class="program-card">
-            <span class="program-type">COMMUNITY EVENT</span>
-            <h3>Digital Inclusion Campaign</h3>
-            <p>Bringing technology access to underserved communities through mobile computer labs and free WiFi zones. Our teams provide basic digital literacy training to help bridge the digital divide.</p>
-            <div class="program-meta">
-                <div class="program-meta-item"><i class="fas fa-chart-line"></i> 15 Communities Reached</div>
-                <div class="program-meta-item"><i class="fas fa-user-graduate"></i> 2000+ Trained</div>
-            </div>
-            <a href="#" class="learn-more-btn">Get Involved</a>
-        </div>
-    </section>
-
-    <section class="event-gallery">
-        <h2 class="section-title">Event Gallery</h2>
-        <p>Highlights from our recent events and programs</p>
-        
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Tech Conference">
-                <div class="gallery-caption">
-                    <h4>2023 Tech Innovation Summit</h4>
-                    <p>Keynote speakers and panel discussions</p>
+        <section class="events-section">
+            <div class="events-container">
+                <div class="events-intro">
+                    <h2>Our Community Engagement</h2>
+                    <p>At Techno Globe Center SA, we're committed to fostering growth and innovation through various events, sponsorships, and development programs.</p>
+                </div>
+                <div class="upcoming-card">
+                    <h3>Upcoming Events</h3>
+                    <ul id="events-list"></ul>
                 </div>
             </div>
+        </section>
+
+        <section class="programs-container" id="programs-list">
+            <!-- Programs will be loaded here dynamically -->
+        </section>
+
+        <section class="event-gallery">
+            <h2 class="section-title">Event Gallery</h2>
+            <div class="gallery-grid" id="gallery-list">
+                <!-- Gallery items will be loaded here dynamically -->
+            </div>
+        </section>
+
+        <section class="sponsorship-section">
+            <h2>Become a Sponsor or Partner</h2>
+            <p>Join us in making a difference through technology education and innovation. We welcome corporate sponsors and community partners for our events and programs.</p>
             
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Workshop">
-                <div class="gallery-caption">
-                    <h4>Digital Skills Workshop</h4>
-                    <p>Hands-on training session</p>
+            <form id="sponsorship-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="org-name">Organization Name</label>
+                        <input type="text" id="org-name" name="org-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-person">Contact Person</label>
+                        <input type="text" id="contact-person" name="contact-person" required>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Team Meeting">
-                <div class="gallery-caption">
-                    <h4>Startup Pitch Day</h4>
-                    <p>Entrepreneurs presenting their ideas</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="sponsorship-section">
-        <h2>Become a Sponsor or Partner</h2>
-        <p>Join us in making a difference through technology education and innovation. We welcome corporate sponsors and community partners for our events and programs.</p>
-        
-        <form id="sponsorship-form">
-            <div class="form-row">
+                
                 <div class="form-group">
-                    <label for="org-name">Organization Name</label>
-                    <input type="text" id="org-name" name="org-name" required>
+                    <label for="sponsor-email">Email Address</label>
+                    <input type="email" id="sponsor-email" name="sponsor-email" required>
                 </div>
+                
                 <div class="form-group">
-                    <label for="contact-person">Contact Person</label>
-                    <input type="text" id="contact-person" name="contact-person" required>
+                    <label for="sponsor-phone">Phone Number</label>
+                    <input type="tel" id="sponsor-phone" name="sponsor-phone" required>
                 </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="sponsor-email">Email Address</label>
-                <input type="email" id="sponsor-email" name="sponsor-email" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="sponsor-phone">Phone Number</label>
-                <input type="tel" id="sponsor-phone" name="sponsor-phone" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="interest-area">Area of Interest</label>
-                <select id="interest-area" name="interest-area" required>
-                    <option value="">Select an option</option>
-                    <option value="Event Sponsorship">Event Sponsorship</option>
-                    <option value="Program Partnership">Program Partnership</option>
-                    <option value="Scholarship Funding">Scholarship Funding</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="sponsor-message">Your Message</label>
-                <textarea id="sponsor-message" name="sponsor-message" rows="5" placeholder="Tell us about your organization and how you'd like to collaborate..."></textarea>
-            </div>
-            
-            <button type="submit" class="submit-btn">Submit Inquiry</button>
-        </form>
-    </section>
-</div>
+                
+                <div class="form-group">
+                    <label for="interest-area">Area of Interest</label>
+                    <select id="interest-area" name="interest-area" required>
+                        <option value="">Select an option</option>
+                        <option value="Event Sponsorship">Event Sponsorship</option>
+                        <option value="Program Partnership">Program Partnership</option>
+                        <option value="Scholarship Funding">Scholarship Funding</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sponsor-message">Your Message</label>
+                    <textarea id="sponsor-message" name="sponsor-message" rows="5" placeholder="Tell us about your organization and how you'd like to collaborate..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Submit Inquiry</button>
+            </form>
+        </section>
+    </div>
     <footer>
         <div class="footer-content">
             <div class="footer-column">
@@ -208,18 +145,8 @@
     </footer>
 
     <script src="../js/scripts.js"></script>
-    <script>
-        // Form submission handling
-        document.getElementById('sponsorship-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Here you would typically send the form data to your server
-            // For now, we'll just show a success message
-            alert('Thank you for your sponsorship inquiry! Our team will contact you within 2 business days to discuss opportunities.');
-            
-            // Reset the form
-            this.reset();
-        });
-    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+    <script src="../js/dynamic-content.js"></script>
 </body>
 </html>

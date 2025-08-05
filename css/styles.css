@@ -39,8 +39,6 @@ body.dark-mode {
 
 /* Header Styles */
 header {
-    width: 90%;
-    max-width: 1400px;
     margin: 20px auto;
     background: var(--glass-light);
     backdrop-filter: blur(10px);
@@ -94,6 +92,9 @@ nav ul {
     list-style: none;
     display: flex;
     gap: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 nav ul li a {
