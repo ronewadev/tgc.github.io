@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Application = require('models/Application');
-const Job = require('models/Job');
-const auth = require('middleware/auth');
+const Application = require('../models/application');
+const Job = require('../models/job');
+const auth = require('../middleware/auth');
 const multer = require('multer');
 const path = require('path');
 
