@@ -79,8 +79,8 @@
         <h2>Admin Login</h2>
         <form id="login-form">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
@@ -91,33 +91,29 @@
         <div id="error-message" class="error-message"></div>
     </div>
 
-    <script>
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            fetch('/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password })
-            })
-            .then(response => {
-                if (!response.ok) throw new Error('Login failed');
-                return response.json();
-            })
-            .then(data => {
-                localStorage.setItem('token', data.token);
-                window.location.href = 'admin.html';
-            })
-            .catch(error => {
-                document.getElementById('error-message').textContent = error.message;
-                document.getElementById('error-message').style.display = 'block';
-            });
-        });
-    </script>
+    <script type="module">
+import { auth } from '../js/firebase.js';
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+
+document.getElementById('login-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const errorMessage = document.getElementById('error-message');
+    errorMessage.style.display = 'none';
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        window.location.href = 'admin.html';
+    } catch (error) {
+        let msg = 'Login failed. ';
+        if (error.code === 'auth/user-not-found') msg += 'User not found.';
+        else if (error.code === 'auth/wrong-password') msg += 'Incorrect password.';
+        else if (error.code === 'auth/invalid-email') msg += 'Invalid email address.';
+        else msg += error.message;
+        errorMessage.textContent = msg;
+        errorMessage.style.display = 'block';
+    }
+});
+</script>
 </body>
 </html>
