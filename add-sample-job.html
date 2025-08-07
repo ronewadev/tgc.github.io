@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Sample Job - Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .form-group { margin: 15px 0; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, textarea, select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        textarea { height: 100px; }
+    </style>
+</head>
+<body>
+    <h1>🛠️ Add Sample Job (Testing)</h1>
+    <div id="status"></div>
+
+    <div id="job-form">
+        <h2>Create Sample Job</h2>
+        <form id="sampleJobForm">
+            <div class="form-group">
+                <label for="title">Job Title:</label>
+                <input type="text" id="title" value="Software Developer" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location" value="Walkerville, Johannesburg" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="type">Job Type:</label>
+                <select id="type" required>
+                    <option value="Full-time">Full-time</option>
+                    <option value="Part-time">Part-time</option>
+                    <option value="Contract">Contract</option>
+                    <option value="Internship">Internship</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" required>We are looking for a skilled Software Developer to join our dynamic team. You will be responsible for developing and maintaining software applications using modern technologies.</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="requirements">Requirements (one per line):</label>
+                <textarea id="requirements">Bachelor's degree in Computer Science or related field
+2+ years of experience in software development
+Proficiency in JavaScript, HTML, CSS
+Experience with React or similar frameworks
+Strong problem-solving skills</textarea>
+            </div>
+            
+            <button type="submit">Add Sample Job</button>
+        </form>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <div id="existing-jobs">
+        <h2>Existing Jobs in Database</h2>
+        <button onclick="loadExistingJobs()">Load Existing Jobs</button>
+        <div id="jobs-display"></div>
+    </div>
+
+    <script type="module">
+        import { db } from './js/firebase.js';
+        import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
+        function addStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.innerHTML = `${new Date().toLocaleTimeString()}: ${message}`;
+            statusDiv.appendChild(div);
+        }
+
+        // Load existing jobs
+        window.loadExistingJobs = async function() {
+            addStatus('🔍 Loading existing jobs...', 'info');
+            try {
+                const querySnapshot = await getDocs(collection(db, "jobs"));
+                const jobsDisplay = document.getElementById('jobs-display');
+                
+                if (querySnapshot.empty) {
+                    jobsDisplay.innerHTML = '<p><strong>No jobs found in database!</strong></p>';
+                    addStatus('📭 No jobs found in database', 'info');
+                } else {
+                    let html = '<h3>Found Jobs:</h3>';
+                    querySnapshot.forEach((doc) => {
+                        const job = doc.data();
+                        html += `
+                            <div style="border: 1px solid #ccc; padding: 15px; margin: 10px 0; border-radius: 5px;">
+                                <h4>${job.title} (${job.isActive ? 'Active' : 'Inactive'})</h4>
+                                <p><strong>Location:</strong> ${job.location}</p>
+                                <p><strong>Type:</strong> ${job.type}</p>
+                                <p><strong>Description:</strong> ${job.description}</p>
+                                <p><strong>Posted:</strong> ${job.postedDate ? new Date(job.postedDate.toDate()).toLocaleDateString() : 'N/A'}</p>
+                            </div>
+                        `;
+                    });
+                    jobsDisplay.innerHTML = html;
+                    addStatus(`✅ Found ${querySnapshot.size} jobs in database`, 'success');
+                }
+            } catch (error) {
+                addStatus(`❌ Error loading jobs: ${error.message}`, 'error');
+                console.error('Error:', error);
+            }
+        };
+
+        // Handle form submission
+        document.getElementById('sampleJobForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            addStatus('📝 Creating sample job...', 'info');
+            
+            try {
+                const formData = {
+                    title: document.getElementById('title').value,
+                    location: document.getElementById('location').value,
+                    type: document.getElementById('type').value,
+                    description: document.getElementById('description').value,
+                    requirements: document.getElementById('requirements').value.split('\n').filter(req => req.trim()),
+                    postedDate: new Date(),
+                    isActive: true
+                };
+                
+                console.log('Adding job with data:', formData);
+                
+                const docRef = await addDoc(collection(db, "jobs"), formData);
+                addStatus(`✅ Sample job created successfully! Document ID: ${docRef.id}`, 'success');
+                
+                // Reload existing jobs
+                loadExistingJobs();
+                
+            } catch (error) {
+                addStatus(`❌ Error creating job: ${error.message}`, 'error');
+                console.error('Error:', error);
+                
+                if (error.code === 'permission-denied') {
+                    addStatus('🔒 Permission denied! You need to update your Firestore security rules to allow writes.', 'error');
+                }
+            }
+        });
+
+        // Load existing jobs on page load
+        loadExistingJobs();
+    </script>
+</body>
+</html>

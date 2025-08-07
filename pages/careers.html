@@ -64,6 +64,9 @@
 
         <section class="job-openings">
             <h2 class="section-title">Current Job Openings</h2>
+            <div id="loading-status" style="padding: 20px; text-align: center; color: #666;">
+                Loading jobs...
+            </div>
             <div id="jobs-list">
                 <!-- Job cards will be loaded here dynamically -->
             </div>
@@ -150,8 +153,6 @@
     </footer>
 
     <script src="../js/scripts.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
-    <script src="../js/dynamic-content.js"></script>
+    <script type="module" src="../js/dynamic-content.js"></script>
 </body>
 </html>
