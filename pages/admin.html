@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Import CSS variables from main stylesheet */
+        @import url('../css/styles.css');
+        
         /* Loading screen */
         .auth-loading {
             position: fixed;
@@ -41,7 +44,7 @@
             display: none;
         }
         
-        /* Admin-specific styles */
+        /* Admin-specific styles that follow styles.css standards */
         .admin-container {
             max-width: 1200px;
             margin: 40px auto;
@@ -49,48 +52,69 @@
         }
         
         .admin-section {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 25px;
+            background: var(--card-bg-light);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
             margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
         }
         
         body.dark-mode .admin-section {
-            background: #1e293b;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            background: var(--card-bg-dark);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
         
         .tab-container {
             display: flex;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 20px;
-            background: #f8fafc;
-            border-radius: 8px;
-            padding: 4px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 25px;
+            background: var(--glass-light);
+            border-radius: 15px;
+            padding: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        body.dark-mode .tab-container {
+            background: var(--glass-dark);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .tab {
-            padding: 12px 20px;
+            padding: 15px 25px;
             cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            margin: 0 2px;
+            border-radius: 10px;
+            transition: var(--transition);
+            font-weight: 600;
+            margin: 0 4px;
             text-align: center;
             flex: 1;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        body.dark-mode .tab {
+            color: var(--text-dark);
         }
         
         .tab:hover {
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            transform: translateY(-2px);
         }
         
         .tab.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--glass-light);
             color: white;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            font-weight: 700;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        body.dark-mode .tab.active {
+            background: var(--glass-dark);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
         }
         
         .tab-content {
@@ -105,63 +129,106 @@
         .job-form textarea,
         .job-form select {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .job-form input,
+        body.dark-mode .job-form textarea,
+        body.dark-mode .job-form select {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-dark);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .job-form input:focus,
+        .job-form textarea:focus,
+        .job-form select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
         }
         
         .job-form textarea {
-            min-height: 100px;
+            min-height: 120px;
+            resize: vertical;
         }
         
-        /* Form buttons styling */
+        .job-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        body.dark-mode .job-form label {
+            color: var(--text-dark);
+        }
+        
+        /* Form buttons following styles.css standards */
         .job-form button[type="submit"], 
         .job-form button[type="button"] {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--glass-light);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
+            padding: 15px 30px;
+            border-radius: 12px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 8px 8px 8px 0;
+            transition: var(--transition);
+            margin: 10px 10px 10px 0;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+        }
+        
+        body.dark-mode .job-form button[type="submit"], 
+        body.dark-mode .job-form button[type="button"] {
+            background: var(--glass-dark);
         }
         
         .job-form button[type="submit"]:hover, 
         .job-form button[type="button"]:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
         }
         
         .job-form button[type="button"] {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
         }
         
         .job-form button[type="button"]:hover {
-            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
         }
         
-        /* Remove requirement button */
+        /* Remove requirement button with danger styling */
         .remove-requirement {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%) !important;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
             color: white !important;
             border: none !important;
-            padding: 8px 12px !important;
-            border-radius: 6px !important;
+            padding: 10px 15px !important;
+            border-radius: 8px !important;
             cursor: pointer !important;
-            font-size: 0.8rem !important;
+            font-size: 0.85rem !important;
             margin: 0 !important;
-            transition: all 0.3s ease !important;
+            transition: var(--transition) !important;
+            font-weight: 600 !important;
         }
         
         .remove-requirement:hover {
-            transform: translateY(-1px) !important;
-            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4) !important;
         }
         
         /* Loading state for buttons */
@@ -209,20 +276,37 @@
             margin-left: 10px;
         }
         
-        /* Admin item cards */
+        /* Admin item cards following styles.css patterns */
         .job-item, .event-item, .program-item {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            background: #f9f9f9;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: var(--card-bg-light);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         
         body.dark-mode .job-item, 
         body.dark-mode .event-item, 
         body.dark-mode .program-item {
-            background: #374151;
-            border-color: #4b5563;
+            background: var(--card-bg-dark);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .job-item:hover, 
+        .event-item:hover, 
+        .program-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        body.dark-mode .job-item:hover, 
+        body.dark-mode .event-item:hover, 
+        body.dark-mode .program-item:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
         
         .job-header, .event-header, .program-header {
@@ -254,50 +338,55 @@
         }
         
         .job-actions button, .event-actions button, .program-actions button {
-            margin-right: 10px;
-            padding: 8px 16px;
+            margin-right: 12px;
+            padding: 10px 20px;
             border: none;
-            border-radius: 6px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             text-transform: uppercase;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(10px);
         }
         
         .btn-primary { 
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); 
+            background: var(--glass-light);
             color: white; 
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
         }
         .btn-secondary { 
-            background: linear-gradient(135deg, #6b7280 0%, #374151 100%); 
+            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%); 
             color: white; 
+            box-shadow: 0 4px 15px rgba(107, 114, 128, 0.2);
         }
         .btn-success { 
             background: linear-gradient(135deg, #10b981 0%, #059669 100%); 
             color: white; 
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
         }
         .btn-danger { 
             background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); 
             color: white; 
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
         }
         
         .btn-primary:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4); 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4); 
         }
         .btn-secondary:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 20px rgba(107, 114, 128, 0.4); 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 25px rgba(107, 114, 128, 0.4); 
         }
         .btn-success:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4); 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4); 
         }
         .btn-danger:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4); 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4); 
         }
         
         .no-data, .error {

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Sample Data - TGC SA</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .main-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .sample-section {
+            background: var(--card-bg-light);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        body.dark-mode .sample-section {
+            background: var(--card-bg-dark);
+        }
+        .status {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 4px solid;
+        }
+        .success {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            border-color: #10b981;
+        }
+        .error {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #dc2626;
+            border-color: #ef4444;
+        }
+        .info {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #1d4ed8;
+            border-color: #3b82f6;
+        }
+        .btn {
+            background: var(--glass-light);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 10px 10px 10px 0;
+            backdrop-filter: blur(10px);
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="sample-section">
+            <h1>🚀 Add Sample Data for Testing</h1>
+            <p>This page helps you quickly populate your Firebase database with sample jobs, events, and programs for testing purposes.</p>
+            
+            <div id="status-container"></div>
+
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin: 30px 0;">
+                <button class="btn" onclick="addSampleJob()">📝 Add Sample Job</button>
+                <button class="btn btn-success" onclick="addSampleEvent()">🎪 Add Sample Event</button>
+                <button class="btn" onclick="addSampleProgram()">🚀 Add Sample Program</button>
+                <button class="btn btn-danger" onclick="clearAllData()">🗑️ Clear All Data</button>
+            </div>
+
+            <div id="data-display">
+                <h3>Current Database Contents</h3>
+                <button class="btn" onclick="loadAllData()">🔄 Refresh Data</button>
+                <div id="jobs-data"></div>
+                <div id="events-data"></div>
+                <div id="programs-data"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { db } from './js/firebase.js';
+        import { collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
+        const statusContainer = document.getElementById('status-container');
+
+        function addStatus(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong>: ${message}`;
+            statusContainer.appendChild(div);
+            div.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Sample job data
+        window.addSampleJob = async function() {
+            addStatus('📝 Creating sample job...', 'info');
+            try {
+                const jobData = {
+                    title: "Senior Software Developer",
+                    description: "We are seeking a talented Senior Software Developer to join our dynamic team. You will be responsible for designing, developing, and maintaining high-quality software applications using modern technologies and best practices.",
+                    requirements: [
+                        "Bachelor's degree in Computer Science or related field",
+                        "5+ years of experience in software development",
+                        "Proficiency in JavaScript, Python, and SQL",
+                        "Experience with React, Node.js, and cloud platforms",
+                        "Strong problem-solving and communication skills",
+                        "Experience with Agile development methodologies"
+                    ],
+                    location: "Walkerville, Johannesburg (Hybrid)",
+                    type: "Full-time",
+                    postedDate: new Date(),
+                    deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
+                    isActive: true,
+                    salary: "R35,000 - R55,000 per month",
+                    benefits: [
+                        "Medical aid",
+                        "Pension fund",
+                        "Professional development opportunities",
+                        "Flexible working hours"
+                    ]
+                };
+                
+                const docRef = await addDoc(collection(db, "jobs"), jobData);
+                addStatus(`✅ Sample job created with ID: ${docRef.id}`, 'success');
+                loadAllData();
+            } catch (error) {
+                addStatus(`❌ Error creating job: ${error.message}`, 'error');
+            }
+        };
+
+        // Sample event data
+        window.addSampleEvent = async function() {
+            addStatus('🎪 Creating sample event...', 'info');
+            try {
+                const eventData = {
+                    title: "Tech Innovation Workshop 2025",
+                    description: "Join us for an exciting workshop exploring the latest trends in technology innovation, AI, and digital transformation. Perfect for entrepreneurs, developers, and tech enthusiasts.",
+                    date: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), // 2 weeks from now
+                    time: "09:00 - 17:00",
+                    location: "TGC SA Offices, 14 South Road, Walkerville",
+                    capacity: 50,
+                    registrationDeadline: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000), // 10 days from now
+                    isActive: true,
+                    topics: [
+                        "Artificial Intelligence in Business",
+                        "Cloud Computing Strategies",
+                        "Digital Marketing Innovation",
+                        "Cybersecurity Best Practices"
+                    ],
+                    speakers: [
+                        "Dr. Sarah Johnson - AI Research Specialist",
+                        "Mike Chen - Cloud Solutions Architect",
+                        "Lisa Williams - Digital Marketing Expert"
+                    ],
+                    cost: "Free for TGC SA partners, R500 for others"
+                };
+                
+                const docRef = await addDoc(collection(db, "events"), eventData);
+                addStatus(`✅ Sample event created with ID: ${docRef.id}`, 'success');
+                loadAllData();
+            } catch (error) {
+                addStatus(`❌ Error creating event: ${error.message}`, 'error');
+            }
+        };
+
+        // Sample program data
+        window.addSampleProgram = async function() {
+            addStatus('🚀 Creating sample program...', 'info');
+            try {
+                const programData = {
+                    title: "Youth ICT Skills Development Program",
+                    description: "A comprehensive 12-week program designed to equip young South Africans with essential ICT skills including programming, digital marketing, and entrepreneurship.",
+                    type: "Skills Development",
+                    duration: "12 weeks",
+                    startDate: new Date(Date.now() + 21 * 24 * 60 * 60 * 1000), // 3 weeks from now
+                    applicationDeadline: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), // 2 weeks from now
+                    isActive: true,
+                    requirements: [
+                        "Age 18-35 years",
+                        "South African citizen or permanent resident",
+                        "Grade 12 certificate or equivalent",
+                        "Basic computer literacy",
+                        "Commitment to complete the full program"
+                    ],
+                    stats: [
+                        {
+                            icon: "fas fa-users",
+                            label: "Participants",
+                            value: "30 per cohort"
+                        },
+                        {
+                            icon: "fas fa-graduation-cap",
+                            label: "Success Rate",
+                            value: "95%"
+                        },
+                        {
+                            icon: "fas fa-briefcase",
+                            label: "Job Placement",
+                            value: "80%"
+                        }
+                    ],
+                    modules: [
+                        "Introduction to Programming (Python)",
+                        "Web Development Basics (HTML, CSS, JavaScript)",
+                        "Digital Marketing Fundamentals",
+                        "Database Management",
+                        "Project Management",
+                        "Entrepreneurship and Business Skills"
+                    ],
+                    benefits: [
+                        "Free training and materials",
+                        "Industry mentorship",
+                        "Job placement assistance",
+                        "Certificate upon completion",
+                        "Networking opportunities"
+                    ]
+                };
+                
+                const docRef = await addDoc(collection(db, "programs"), programData);
+                addStatus(`✅ Sample program created with ID: ${docRef.id}`, 'success');
+                loadAllData();
+            } catch (error) {
+                addStatus(`❌ Error creating program: ${error.message}`, 'error');
+            }
+        };
+
+        // Clear all data
+        window.clearAllData = async function() {
+            if (!confirm('Are you sure you want to delete ALL jobs, events, and programs? This cannot be undone!')) {
+                return;
+            }
+            
+            addStatus('🗑️ Clearing all data...', 'info');
+            try {
+                // Clear jobs
+                const jobsSnapshot = await getDocs(collection(db, "jobs"));
+                for (const docSnapshot of jobsSnapshot.docs) {
+                    await deleteDoc(doc(db, "jobs", docSnapshot.id));
+                }
+                
+                // Clear events
+                const eventsSnapshot = await getDocs(collection(db, "events"));
+                for (const docSnapshot of eventsSnapshot.docs) {
+                    await deleteDoc(doc(db, "events", docSnapshot.id));
+                }
+                
+                // Clear programs
+                const programsSnapshot = await getDocs(collection(db, "programs"));
+                for (const docSnapshot of programsSnapshot.docs) {
+                    await deleteDoc(doc(db, "programs", docSnapshot.id));
+                }
+                
+                addStatus('✅ All data cleared successfully!', 'success');
+                loadAllData();
+            } catch (error) {
+                addStatus(`❌ Error clearing data: ${error.message}`, 'error');
+            }
+        };
+
+        // Load and display all data
+        window.loadAllData = async function() {
+            addStatus('🔄 Loading all data...', 'info');
+            try {
+                // Load jobs
+                const jobsSnapshot = await getDocs(collection(db, "jobs"));
+                const jobsData = document.getElementById('jobs-data');
+                jobsData.innerHTML = `<h4>Jobs (${jobsSnapshot.size})</h4>`;
+                jobsSnapshot.forEach((doc) => {
+                    const job = doc.data();
+                    jobsData.innerHTML += `<div style="margin: 10px 0; padding: 10px; background: rgba(0,0,0,0.05); border-radius: 5px;"><strong>${job.title}</strong> - ${job.location} (${job.isActive ? 'Active' : 'Inactive'})</div>`;
+                });
+                
+                // Load events
+                const eventsSnapshot = await getDocs(collection(db, "events"));
+                const eventsData = document.getElementById('events-data');
+                eventsData.innerHTML = `<h4>Events (${eventsSnapshot.size})</h4>`;
+                eventsSnapshot.forEach((doc) => {
+                    const event = doc.data();
+                    eventsData.innerHTML += `<div style="margin: 10px 0; padding: 10px; background: rgba(0,0,0,0.05); border-radius: 5px;"><strong>${event.title}</strong> - ${event.date ? new Date(event.date.toDate()).toLocaleDateString() : 'TBD'} (${event.isActive ? 'Active' : 'Inactive'})</div>`;
+                });
+                
+                // Load programs
+                const programsSnapshot = await getDocs(collection(db, "programs"));
+                const programsData = document.getElementById('programs-data');
+                programsData.innerHTML = `<h4>Programs (${programsSnapshot.size})</h4>`;
+                programsSnapshot.forEach((doc) => {
+                    const program = doc.data();
+                    programsData.innerHTML += `<div style="margin: 10px 0; padding: 10px; background: rgba(0,0,0,0.05); border-radius: 5px;"><strong>${program.title}</strong> - ${program.duration || 'Duration TBD'} (${program.isActive ? 'Active' : 'Inactive'})</div>`;
+                });
+                
+                addStatus('✅ Data loaded successfully!', 'success');
+            } catch (error) {
+                addStatus(`❌ Error loading data: ${error.message}`, 'error');
+            }
+        };
+
+        // Load data on page load
+        window.addEventListener('load', () => {
+            loadAllData();
+        });
+    </script>
+</body>
+</html>
