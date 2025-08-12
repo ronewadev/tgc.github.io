@@ -257,15 +257,29 @@ async function loadProgramsOnEventsPage() {
         <h3>${program.title || 'Untitled Program'}</h3>
         <p>${program.description || 'Program description coming soon.'}</p>
         <div class="program-meta">
+          ${program.duration ? `<div class="program-meta-item"><i class="fas fa-clock"></i> Duration: ${program.duration}</div>` : ''}
+          ${program.startDate ? `<div class="program-meta-item"><i class="fas fa-calendar-start"></i> Starts: ${new Date(program.startDate.toDate()).toLocaleDateString()}</div>` : ''}
+          ${program.applicationDeadline ? `<div class="program-meta-item"><i class="fas fa-calendar-times"></i> Apply by: ${new Date(program.applicationDeadline.toDate()).toLocaleDateString()}</div>` : ''}
           ${program.stats?.map(stat => 
             `<div class="program-meta-item">
               <i class="${stat.icon || 'fas fa-info-circle'}"></i> ${stat.label}: ${stat.value}
             </div>`
           ).join('') || ''}
-          ${program.duration ? `<div class="program-meta-item"><i class="fas fa-clock"></i> Duration: ${program.duration}</div>` : ''}
-          ${program.startDate ? `<div class="program-meta-item"><i class="fas fa-calendar-start"></i> Starts: ${new Date(program.startDate.toDate()).toLocaleDateString()}</div>` : ''}
         </div>
-        <a href="#" class="learn-more-btn" onclick="showProgramDetails('${doc.id}')">Learn More</a>
+        ${program.requirements && program.requirements.length > 0 ? `
+          <div class="program-requirements" style="margin-top: 15px;">
+            <h4 style="font-size: 0.9rem; margin-bottom: 8px; color: var(--text-light);">Requirements:</h4>
+            <ul style="font-size: 0.85rem; color: #666; margin-left: 20px;">
+              ${program.requirements.map(req => `<li>${req}</li>`).join('')}
+            </ul>
+          </div>
+        ` : ''}
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
+          <a href="#" class="learn-more-btn" onclick="showProgramDetails('${doc.id}')">Learn More</a>
+          ${program.applicationDeadline && new Date(program.applicationDeadline.toDate()) > new Date() ? 
+            `<a href="#" class="learn-more-btn" style="background: var(--accent-color);" onclick="applyToProgram('${doc.id}')">Apply Now</a>` 
+            : ''}
+        </div>
       `;
       programsList.appendChild(programCard);
     });
@@ -287,10 +301,266 @@ async function loadProgramsOnEventsPage() {
 }
 
 // Show program details (placeholder function)
-window.showProgramDetails = function(programId) {
-  console.log('Show details for program:', programId);
-  // TODO: Implement program details modal or page
-  alert('Program details feature coming soon!');
+window.showProgramDetails = async function(programId) {
+  try {
+    console.log('Showing details for program ID:', programId);
+    
+    const programDoc = await getDoc(doc(db, 'programs', programId));
+    if (!programDoc.exists()) {
+      alert('Program not found');
+      return;
+    }
+    
+    const program = programDoc.data();
+    
+    // Create modal with program details
+    const modal = document.createElement('div');
+    modal.className = 'program-details-modal';
+    modal.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+      background: rgba(0,0,0,0.5); z-index: 1000; display: flex; 
+      align-items: center; justify-content: center; padding: 20px;
+    `;
+    
+    modal.innerHTML = `
+      <div class="modal-content" style="
+        background: white; border-radius: 12px; max-width: 600px; 
+        width: 100%; max-height: 90vh; overflow-y: auto; position: relative;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      ">
+        <span class="close" style="
+          position: absolute; top: 15px; right: 20px; font-size: 28px; 
+          font-weight: bold; cursor: pointer; color: #aaa;
+        " onclick="this.parentElement.parentElement.remove()">&times;</span>
+        
+        <div class="program-details" style="padding: 30px;">
+          <h2 style="color: var(--primary-color); margin-bottom: 10px;">${program.title}</h2>
+          <p class="program-type" style="
+            background: var(--primary-color); color: white; padding: 4px 12px; 
+            border-radius: 20px; display: inline-block; font-size: 0.85rem; 
+            margin-bottom: 20px; text-transform: uppercase;
+          ">${program.type || 'PROGRAM'}</p>
+          
+          <div class="program-description" style="margin-bottom: 20px;">
+            ${program.description ? `<p style="color: #555; line-height: 1.6;">${program.description}</p>` : ''}
+            ${program.fullDescription ? `<p style="color: #555; line-height: 1.6; margin-top: 15px;">${program.fullDescription}</p>` : ''}
+          </div>
+          
+          ${program.requirements && program.requirements.length > 0 ? `
+            <div class="program-requirements" style="margin-bottom: 20px;">
+              <h3 style="color: var(--secondary-color); margin-bottom: 10px;">Requirements:</h3>
+              <ul style="color: #666; margin-left: 20px;">
+                ${program.requirements.map(req => `<li style="margin-bottom: 5px;">${req}</li>`).join('')}
+              </ul>
+            </div>
+          ` : ''}
+          
+          ${program.benefits && program.benefits.length > 0 ? `
+            <div class="program-benefits" style="margin-bottom: 20px;">
+              <h3 style="color: var(--secondary-color); margin-bottom: 10px;">Benefits:</h3>
+              <ul style="color: #666; margin-left: 20px;">
+                ${program.benefits.map(benefit => `<li style="margin-bottom: 5px;">${benefit}</li>`).join('')}
+              </ul>
+            </div>
+          ` : ''}
+          
+          <div class="program-info" style="
+            background: #f8f9fa; padding: 15px; border-radius: 8px; 
+            margin-bottom: 20px; border-left: 4px solid var(--accent-color);
+          ">
+            ${program.duration ? `<p style="margin-bottom: 8px;"><strong>Duration:</strong> ${program.duration}</p>` : ''}
+            ${program.startDate ? `<p style="margin-bottom: 8px;"><strong>Start Date:</strong> ${new Date(program.startDate.toDate()).toLocaleDateString()}</p>` : ''}
+            ${program.applicationDeadline ? `<p style="margin-bottom: 8px;"><strong>Application Deadline:</strong> ${new Date(program.applicationDeadline.toDate()).toLocaleDateString()}</p>` : ''}
+            ${program.location ? `<p style="margin-bottom: 8px;"><strong>Location:</strong> ${program.location}</p>` : ''}
+          </div>
+          
+          ${program.applicationDeadline && new Date(program.applicationDeadline.toDate()) > new Date() ? 
+            `<button onclick="applyToProgram('${programId}')" class="apply-btn" style="
+              background: var(--accent-color); color: white; padding: 12px 24px; 
+              border: none; border-radius: 6px; cursor: pointer; font-size: 1rem;
+              transition: background 0.3s ease;
+            " onmouseover="this.style.background='var(--primary-color)'" 
+            onmouseout="this.style.background='var(--accent-color)'">Apply Now</button>`
+            : `<p style="color: #999; font-style: italic;">Application deadline has passed</p>`}
+        </div>
+      </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Add click outside to close
+    modal.onclick = function(e) {
+      if (e.target === modal) {
+        modal.remove();
+      }
+    };
+    
+    // Close on Escape key
+    document.addEventListener('keydown', function closeOnEscape(e) {
+      if (e.key === 'Escape') {
+        modal.remove();
+        document.removeEventListener('keydown', closeOnEscape);
+      }
+    });
+    
+  } catch (error) {
+    console.error('Error showing program details:', error);
+    alert('Error loading program details');
+  }
+};
+
+// Apply to program function
+window.applyToProgram = function(programId) {
+  console.log('Applying to program ID:', programId);
+  
+  // Create application modal
+  const modal = document.createElement('div');
+  modal.className = 'application-modal';
+  modal.style.cssText = `
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.5); z-index: 1001; display: flex; 
+    align-items: center; justify-content: center; padding: 20px;
+  `;
+  
+  modal.innerHTML = `
+    <div class="modal-content" style="
+      background: white; border-radius: 12px; max-width: 500px; 
+      width: 100%; max-height: 90vh; overflow-y: auto; position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    ">
+      <span class="close" style="
+        position: absolute; top: 15px; right: 20px; font-size: 28px; 
+        font-weight: bold; cursor: pointer; color: #aaa;
+      " onclick="this.parentElement.parentElement.remove()">&times;</span>
+      
+      <div style="padding: 30px;">
+        <h2 style="color: var(--primary-color); margin-bottom: 20px;">Apply to Program</h2>
+        <form id="program-application-form">
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label for="applicant-name" style="display: block; margin-bottom: 5px; font-weight: 500;">Full Name:</label>
+            <input type="text" id="applicant-name" name="applicantName" required style="
+              width: 100%; padding: 10px; border: 2px solid #e1e5e9; border-radius: 6px; 
+              font-size: 1rem; transition: border-color 0.3s ease;
+            ">
+          </div>
+          
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label for="applicant-email" style="display: block; margin-bottom: 5px; font-weight: 500;">Email:</label>
+            <input type="email" id="applicant-email" name="applicantEmail" required style="
+              width: 100%; padding: 10px; border: 2px solid #e1e5e9; border-radius: 6px; 
+              font-size: 1rem; transition: border-color 0.3s ease;
+            ">
+          </div>
+          
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label for="applicant-phone" style="display: block; margin-bottom: 5px; font-weight: 500;">Phone:</label>
+            <input type="tel" id="applicant-phone" name="applicantPhone" required style="
+              width: 100%; padding: 10px; border: 2px solid #e1e5e9; border-radius: 6px; 
+              font-size: 1rem; transition: border-color 0.3s ease;
+            ">
+          </div>
+          
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label for="motivation-letter" style="display: block; margin-bottom: 5px; font-weight: 500;">Why do you want to join this program?</label>
+            <textarea id="motivation-letter" name="motivationLetter" rows="4" required style="
+              width: 100%; padding: 10px; border: 2px solid #e1e5e9; border-radius: 6px; 
+              font-size: 1rem; resize: vertical; transition: border-color 0.3s ease;
+            "></textarea>
+          </div>
+          
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label for="resume-upload" style="display: block; margin-bottom: 5px; font-weight: 500;">Upload Resume (PDF only):</label>
+            <input type="file" id="resume-upload" accept=".pdf" required style="
+              width: 100%; padding: 10px; border: 2px solid #e1e5e9; border-radius: 6px; 
+              font-size: 1rem;
+            ">
+            <small style="color: #666; font-size: 0.85rem; margin-top: 5px; display: block;">
+              Please upload a PDF file (max 10MB)
+            </small>
+          </div>
+          
+          <button type="submit" style="
+            background: var(--primary-color); color: white; padding: 12px 24px; 
+            border: none; border-radius: 6px; cursor: pointer; width: 100%; 
+            font-size: 1rem; transition: background 0.3s ease;
+          " onmouseover="this.style.background='var(--secondary-color)'" 
+          onmouseout="this.style.background='var(--primary-color)'">Submit Application</button>
+        </form>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  
+  // Handle form submission
+  document.getElementById('program-application-form').onsubmit = async function(e) {
+    e.preventDefault();
+    
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    submitBtn.disabled = true;
+    
+    try {
+      const formData = new FormData(e.target);
+      const resumeFile = document.getElementById('resume-upload').files[0];
+      
+      // Validate file
+      if (!resumeFile) {
+        throw new Error('Please select a resume file');
+      }
+      
+      if (resumeFile.type !== 'application/pdf') {
+        throw new Error('Please upload a PDF file only');
+      }
+      
+      if (resumeFile.size > 10 * 1024 * 1024) {
+        throw new Error('File size must be less than 10MB');
+      }
+      
+      // Upload resume
+      const applicantName = formData.get('applicantName');
+      const resumeUrl = await uploadResumeToStorage(resumeFile, `program_${programId}_${Date.now()}`);
+      
+      // Save application to Firestore
+      await addDoc(collection(db, 'program-applications'), {
+        programId: programId,
+        applicantName: applicantName,
+        applicantEmail: formData.get('applicantEmail'),
+        applicantPhone: formData.get('applicantPhone'),
+        motivationLetter: formData.get('motivationLetter'),
+        resumeUrl: resumeUrl.url,
+        resumeInfo: resumeUrl,
+        applicationDate: new Date(),
+        status: 'pending'
+      });
+      
+      alert('Application submitted successfully! We will review your application and contact you soon.');
+      modal.remove();
+      
+    } catch (error) {
+      console.error('Error submitting application:', error);
+      alert(`Error submitting application: ${error.message}`);
+    } finally {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
+  };
+  
+  // Add click outside to close
+  modal.onclick = function(e) {
+    if (e.target === modal) {
+      modal.remove();
+    }
+  };
+  
+  // Close on Escape key
+  document.addEventListener('keydown', function closeOnEscape(e) {
+    if (e.key === 'Escape') {
+      modal.remove();
+      document.removeEventListener('keydown', closeOnEscape);
+    }
+  });
 };
 
 // Upload resume to Firebase Storage

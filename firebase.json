@@ -9,7 +9,12 @@
       "**/models/**",
       "**/routes/**",
       "**/middleware/**",
-      "**/tgc.github.io/**"
+      "**/tgc.github.io/**",
+      "**/scripts/**",
+      "**/*.md",
+      "**/*.env*",
+      "**/*.rules",
+      "**/config.js"
     ],
     "rewrites": [
       {
@@ -47,12 +52,11 @@
       {
         "source": "/team",
         "destination": "/pages/team.html"
-      },
-      {
-        "source": "**",
-        "destination": "/index.html"
       }
     ],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "errorPage": "/public/404.html",
     "headers": [
       {
         "source": "**/*.@(js|css)",

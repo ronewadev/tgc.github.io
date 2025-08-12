@@ -39,12 +39,12 @@ body.dark-mode {
 
 /* Header Styles */
 header {
-    margin: 20px auto;
+    /* margin: 20px auto; */
     background: var(--glass-light);
     backdrop-filter: blur(10px);
     padding: 15px 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 15px;
+    /* border-radius: 15px; */
     position: fixed;
     top: 0;
     left: 0;
@@ -111,6 +111,7 @@ nav ul li a {
 nav ul li a.active {
     background: rgba(255, 255, 255, 0.2);
     font-weight: 600;
+    border: white 1px solid;
 }
 
 nav ul li a:hover {
@@ -503,12 +504,15 @@ body.dark-mode .upcoming-card li {
 }
 
 /* Programs & Sponsorships Section */
+
 .programs-container {
     max-width: 1200px;
     margin: 60px auto;
-    display: grid;
+    display: flex;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
 }
 
 .program-card {

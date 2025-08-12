@@ -105,7 +105,7 @@
         }
         
         .tab.active {
-            background: var(--glass-light);
+            background: var(--primary-color);
             color: white;
             font-weight: 700;
             box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
@@ -113,7 +113,7 @@
         }
         
         body.dark-mode .tab.active {
-            background: var(--glass-dark);
+            background: var(--primary-color);
             box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
         }
         
@@ -177,7 +177,7 @@
         /* Form buttons following styles.css standards */
         .job-form button[type="submit"], 
         .job-form button[type="button"] {
-            background: var(--glass-light);
+            background: var(--primary-color);
             color: white;
             border: none;
             padding: 15px 30px;
@@ -189,27 +189,23 @@
             margin: 10px 10px 10px 0;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            backdrop-filter: blur(10px);
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
-        }
-        
-        body.dark-mode .job-form button[type="submit"], 
-        body.dark-mode .job-form button[type="button"] {
-            background: var(--glass-dark);
         }
         
         .job-form button[type="submit"]:hover, 
         .job-form button[type="button"]:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+            background: var(--secondary-color);
         }
         
         .job-form button[type="button"] {
-            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            background: var(--accent-color);
         }
         
         .job-form button[type="button"]:hover {
-            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
+            background: var(--primary-color);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
         }
         
         /* Remove requirement button with danger styling */
@@ -352,7 +348,7 @@
         }
         
         .btn-primary { 
-            background: var(--glass-light);
+            background: var(--primary-color);
             color: white; 
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
         }
@@ -498,6 +494,9 @@
                     <label for="event-date">Event Date</label>
                     <input type="date" id="event-date" required>
                     
+                    <label for="event-time">Event Time</label>
+                    <input type="time" id="event-time" placeholder="Event Time">
+                    
                     <label for="event-location">Event Location</label>
                     <input type="text" id="event-location" placeholder="Event Location" required>
                     
@@ -520,6 +519,17 @@
                 <form id="program-form" class="job-form">
                     <label for="program-title">Program Title</label>
                     <input type="text" id="program-title" placeholder="Program Title" required>
+                    
+                    <label for="program-type">Program Type</label>
+                    <select id="program-type" required>
+                        <option value="">Select Program Type</option>
+                        <option value="Skills Development">Skills Development</option>
+                        <option value="Training">Training</option>
+                        <option value="Certification">Certification</option>
+                        <option value="Workshop">Workshop</option>
+                        <option value="Internship">Internship</option>
+                        <option value="Other">Other</option>
+                    </select>
                     
                     <label for="program-description">Program Description</label>
                     <textarea id="program-description" placeholder="Program Description" required></textarea>
