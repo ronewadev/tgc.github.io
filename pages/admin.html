@@ -7,7 +7,44 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Admin-specific styles */
+        /* Import CSS variables from main stylesheet */
+        @import url('../css/styles.css');
+        
+        /* Loading screen */
+        .auth-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            flex-direction: column;
+        }
+        
+        .auth-loading .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .main-content {
+            display: none;
+        }
+        
+        /* Admin-specific styles that follow styles.css standards */
         .admin-container {
             max-width: 1200px;
             margin: 40px auto;
@@ -15,33 +52,69 @@
         }
         
         .admin-section {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 25px;
+            background: var(--card-bg-light);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
             margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
         }
         
         body.dark-mode .admin-section {
-            background: #1e293b;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            background: var(--card-bg-dark);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
         
         .tab-container {
             display: flex;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 25px;
+            background: var(--glass-light);
+            border-radius: 15px;
+            padding: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        body.dark-mode .tab-container {
+            background: var(--glass-dark);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .tab {
-            padding: 10px 20px;
+            padding: 15px 25px;
             cursor: pointer;
-            border-bottom: 3px solid transparent;
+            border-radius: 10px;
+            transition: var(--transition);
+            font-weight: 600;
+            margin: 0 4px;
+            text-align: center;
+            flex: 1;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        body.dark-mode .tab {
+            color: var(--text-dark);
+        }
+        
+        .tab:hover {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            transform: translateY(-2px);
         }
         
         .tab.active {
-            border-bottom: 3px solid var(--primary-color);
-            font-weight: 600;
+            background: var(--primary-color);
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        body.dark-mode .tab.active {
+            background: var(--primary-color);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
         }
         
         .tab-content {
@@ -56,14 +129,124 @@
         .job-form textarea,
         .job-form select {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .job-form input,
+        body.dark-mode .job-form textarea,
+        body.dark-mode .job-form select {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-dark);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .job-form input:focus,
+        .job-form textarea:focus,
+        .job-form select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
         }
         
         .job-form textarea {
-            min-height: 100px;
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .job-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        body.dark-mode .job-form label {
+            color: var(--text-dark);
+        }
+        
+        /* Form buttons following styles.css standards */
+        .job-form button[type="submit"], 
+        .job-form button[type="button"] {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 10px 10px 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+        }
+        
+        .job-form button[type="submit"]:hover, 
+        .job-form button[type="button"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+            background: var(--secondary-color);
+        }
+        
+        .job-form button[type="button"] {
+            background: var(--accent-color);
+        }
+        
+        .job-form button[type="button"]:hover {
+            background: var(--primary-color);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+        
+        /* Remove requirement button with danger styling */
+        .remove-requirement {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+            color: white !important;
+            border: none !important;
+            padding: 10px 15px !important;
+            border-radius: 8px !important;
+            cursor: pointer !important;
+            font-size: 0.85rem !important;
+            margin: 0 !important;
+            transition: var(--transition) !important;
+            font-weight: 600 !important;
+        }
+        
+        .remove-requirement:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4) !important;
+        }
+        
+        /* Loading state for buttons */
+        .btn-loading {
+            position: relative;
+            color: transparent !important;
+        }
+        
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 50%;
+            left: 50%;
+            margin-left: -8px;
+            margin-top: -8px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            animation: spin 1s ease-in-out infinite;
+            color: white;
         }
         
         .requirement-item {
@@ -88,10 +271,138 @@
             border-radius: 4px;
             margin-left: 10px;
         }
+        
+        /* Admin item cards following styles.css patterns */
+        .job-item, .event-item, .program-item {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: var(--card-bg-light);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.dark-mode .job-item, 
+        body.dark-mode .event-item, 
+        body.dark-mode .program-item {
+            background: var(--card-bg-dark);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .job-item:hover, 
+        .event-item:hover, 
+        .program-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        body.dark-mode .job-item:hover, 
+        body.dark-mode .event-item:hover, 
+        body.dark-mode .program-item:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .job-header, .event-header, .program-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .job-status, .event-status, .program-status {
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .job-status.active, .event-status.active, .program-status.active {
+            background-color: #10b981;
+            color: white;
+        }
+        
+        .job-status.inactive, .event-status.inactive, .program-status.inactive {
+            background-color: #ef4444;
+            color: white;
+        }
+        
+        .job-actions, .event-actions, .program-actions {
+            margin-top: 15px;
+        }
+        
+        .job-actions button, .event-actions button, .program-actions button {
+            margin-right: 12px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-primary { 
+            background: var(--primary-color);
+            color: white; 
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+        }
+        .btn-secondary { 
+            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%); 
+            color: white; 
+            box-shadow: 0 4px 15px rgba(107, 114, 128, 0.2);
+        }
+        .btn-success { 
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%); 
+            color: white; 
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+        }
+        .btn-danger { 
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); 
+            color: white; 
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+        }
+        
+        .btn-primary:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4); 
+        }
+        .btn-secondary:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 25px rgba(107, 114, 128, 0.4); 
+        }
+        .btn-success:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4); 
+        }
+        .btn-danger:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4); 
+        }
+        
+        .no-data, .error {
+            text-align: center;
+            padding: 40px;
+            color: #6b7280;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
-    <header>
+    <!-- Authentication Loading Screen -->
+    <div id="auth-loading" class="auth-loading">
+        <div class="spinner"></div>
+        <p>Verifying authentication...</p>
+    </div>
+
+    <!-- Main Content (hidden until authenticated) -->
+    <div id="main-content" class="main-content">
+        <header>
         <nav>
             <div class="logo-container">
                 <button class="menu-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
@@ -118,6 +429,8 @@
                 <div class="tab active" data-tab="jobs">Manage Jobs</div>
                 <div class="tab" data-tab="applications">View Applications</div>
                 <div class="tab" data-tab="add-job">Add New Job</div>
+                <div class="tab" data-tab="events">Manage Events</div>
+                <div class="tab" data-tab="programs">Manage Programs</div>
             </div>
             
             <div class="tab-content active" id="jobs-content">
@@ -164,10 +477,112 @@
                     <button type="submit">Post Job</button>
                 </form>
             </div>
+            
+            <!-- Events Management Section -->
+            <div class="tab-content" id="events-content">
+                <h3>Events Management</h3>
+                <div id="events-list"></div>
+                
+                <h4>Add New Event</h4>
+                <form id="event-form" class="job-form">
+                    <label for="event-title">Event Title</label>
+                    <input type="text" id="event-title" placeholder="Event Title" required>
+                    
+                    <label for="event-description">Event Description</label>
+                    <textarea id="event-description" placeholder="Event Description" required></textarea>
+                    
+                    <label for="event-date">Event Date</label>
+                    <input type="date" id="event-date" required>
+                    
+                    <label for="event-time">Event Time</label>
+                    <input type="time" id="event-time" placeholder="Event Time">
+                    
+                    <label for="event-location">Event Location</label>
+                    <input type="text" id="event-location" placeholder="Event Location" required>
+                    
+                    <label for="event-capacity">Capacity (optional)</label>
+                    <input type="number" id="event-capacity" placeholder="Maximum attendees">
+                    
+                    <label for="event-registration-deadline">Registration Deadline (optional)</label>
+                    <input type="date" id="event-registration-deadline">
+                    
+                    <button type="submit">Create Event</button>
+                </form>
+            </div>
+            
+            <!-- Programs Management Section -->
+            <div class="tab-content" id="programs-content">
+                <h3>Programs Management</h3>
+                <div id="programs-list"></div>
+                
+                <h4>Add New Program</h4>
+                <form id="program-form" class="job-form">
+                    <label for="program-title">Program Title</label>
+                    <input type="text" id="program-title" placeholder="Program Title" required>
+                    
+                    <label for="program-type">Program Type</label>
+                    <select id="program-type" required>
+                        <option value="">Select Program Type</option>
+                        <option value="Skills Development">Skills Development</option>
+                        <option value="Training">Training</option>
+                        <option value="Certification">Certification</option>
+                        <option value="Workshop">Workshop</option>
+                        <option value="Internship">Internship</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    
+                    <label for="program-description">Program Description</label>
+                    <textarea id="program-description" placeholder="Program Description" required></textarea>
+                    
+                    <label for="program-duration">Duration</label>
+                    <input type="text" id="program-duration" placeholder="e.g., 6 weeks, 3 months" required>
+                    
+                    <label for="program-requirements">Requirements (one per line)</label>
+                    <textarea id="program-requirements" placeholder="List requirements, one per line"></textarea>
+                    
+                    <label for="program-start-date">Start Date (optional)</label>
+                    <input type="date" id="program-start-date">
+                    
+                    <label for="program-application-deadline">Application Deadline (optional)</label>
+                    <input type="date" id="program-application-deadline">
+                    
+                    <button type="submit">Create Program</button>
+                </form>
+            </div>
         </div>
     </section>
+    </div> <!-- Close main-content div -->
+
+    <!-- Authentication and Security Script -->
+    <script type="module">
+        import { auth } from '../js/firebase.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+
+        // Immediate security check - redirect if no auth state
+        const authLoading = document.getElementById('auth-loading');
+        const mainContent = document.getElementById('main-content');
+        
+        // Check authentication state
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is authenticated, show admin content
+                console.log('Admin authenticated:', user.email);
+                authLoading.style.display = 'none';
+                mainContent.style.display = 'block';
+            } else {
+                // User is not authenticated, redirect to login
+                console.log('User not authenticated, redirecting to login');
+                window.location.href = 'login.html';
+            }
+        });
+        
+        // Additional security: prevent direct access attempts
+        if (!firebase || !auth) {
+            window.location.href = 'login.html';
+        }
+    </script>
 
     <script src="../js/scripts.js"></script>
-    <script src="../js/admin.js"></script>
+    <script type="module" src="../js/admin.js"></script>
 </body>
 </html>

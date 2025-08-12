@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Test</title>
+</head>
+<body>
+    <h1>Firebase Connection Test</h1>
+    <div id="status">Testing Firebase connection...</div>
+    
+    <script type="module">
+        import { auth, db } from './js/firebase.js';
+        
+        // Test Firebase connection
+        try {
+            console.log('Firebase Auth:', auth);
+            console.log('Firebase Firestore:', db);
+            document.getElementById('status').innerHTML = '✅ Firebase connected successfully!<br>You can now try logging in.';
+        } catch (error) {
+            console.error('Firebase connection error:', error);
+            document.getElementById('status').innerHTML = '❌ Firebase connection failed: ' + error.message;
+        }
+    </script>
+</body>
+</html>

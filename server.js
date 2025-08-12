@@ -1,12 +1,13 @@
+// Load environment variables
 require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
+// These would need to be installed via npm:
+// const helmet = require('helmet');
+// const rateLimit = require('express-rate-limit');
 
 const app = express();
 
