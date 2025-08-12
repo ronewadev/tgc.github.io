@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Jobs Loading</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>Debug: Jobs Loading Test</h1>
+    <div id="status"></div>
+    <div id="results"></div>
+
+    <script type="module">
+        import { db } from './js/firebase.js';
+        import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
+        function addStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.innerHTML = `${new Date().toLocaleTimeString()}: ${message}`;
+            statusDiv.appendChild(div);
+        }
+
+        async function testJobsLoading() {
+            addStatus('🔍 Starting jobs loading test...', 'info');
+            
+            try {
+                addStatus('📡 Connecting to Firestore...', 'info');
+                
+                // Test 1: Try to get all jobs
+                addStatus('📋 Fetching all jobs...', 'info');
+                const allJobsSnapshot = await getDocs(collection(db, "jobs"));
+                addStatus(`✅ Successfully fetched ${allJobsSnapshot.size} jobs from collection`, 'success');
+                
+                // Test 2: Try to get active jobs only
+                addStatus('🎯 Fetching active jobs only...', 'info');
+                const activeJobsQuery = query(collection(db, "jobs"), where("isActive", "==", true));
+                const activeJobsSnapshot = await getDocs(activeJobsQuery);
+                addStatus(`✅ Successfully fetched ${activeJobsSnapshot.size} active jobs`, 'success');
+                
+                // Display the jobs data
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = '<h2>Jobs Data:</h2>';
+                
+                if (allJobsSnapshot.empty) {
+                    resultsDiv.innerHTML += '<p><strong>No jobs found in database!</strong></p>';
+                } else {
+                    allJobsSnapshot.forEach((doc, index) => {
+                        const job = doc.data();
+                        resultsDiv.innerHTML += `
+                            <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+                                <h3>Job ${index + 1} (ID: ${doc.id})</h3>
+                                <p><strong>Title:</strong> ${job.title || 'N/A'}</p>
+                                <p><strong>Location:</strong> ${job.location || 'N/A'}</p>
+                                <p><strong>Active:</strong> ${job.isActive ? 'Yes' : 'No'}</p>
+                                <p><strong>Type:</strong> ${job.type || 'N/A'}</p>
+                                <p><strong>Posted Date:</strong> ${job.postedDate ? new Date(job.postedDate.toDate()).toLocaleDateString() : 'N/A'}</p>
+                            </div>
+                        `;
+                    });
+                }
+                
+                addStatus('🎉 Jobs loading test completed successfully!', 'success');
+                
+            } catch (error) {
+                addStatus(`❌ Error: ${error.message}`, 'error');
+                console.error('Full error:', error);
+                
+                if (error.code === 'permission-denied') {
+                    addStatus('🔒 This appears to be a Firestore security rules issue. You need to update your Firestore rules.', 'error');
+                }
+            }
+        }
+
+        // Run the test when page loads
+        testJobsLoading();
+    </script>
+</body>
+</html>

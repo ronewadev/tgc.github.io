@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Storage Test - Resume Upload</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            max-width: 800px; 
+            margin: 0 auto; 
+        }
+        .status { 
+            padding: 15px; 
+            margin: 15px 0; 
+            border-radius: 8px; 
+            border-left: 4px solid;
+        }
+        .success { 
+            background-color: #d4edda; 
+            color: #155724; 
+            border-color: #28a745;
+        }
+        .error { 
+            background-color: #f8d7da; 
+            color: #721c24; 
+            border-color: #dc3545;
+        }
+        .info { 
+            background-color: #d1ecf1; 
+            color: #0c5460; 
+            border-color: #17a2b8;
+        }
+        .warning { 
+            background-color: #fff3cd; 
+            color: #856404; 
+            border-color: #ffc107;
+        }
+        button { 
+            padding: 12px 24px; 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 16px;
+        }
+        button:hover { background: #0056b3; }
+        button:disabled { 
+            background: #6c757d; 
+            cursor: not-allowed; 
+        }
+        .form-group { 
+            margin: 20px 0; 
+        }
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: bold; 
+        }
+        input[type="file"] { 
+            width: 100%; 
+            padding: 12px; 
+            border: 2px dashed #007bff; 
+            border-radius: 6px; 
+            background: #f8f9fa;
+        }
+        .upload-info {
+            margin-top: 10px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .progress {
+            width: 100%;
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔥 Firebase Storage Test - Resume Upload</h1>
+    <p>This page tests the resume upload functionality to ensure documents are properly stored in Firebase Storage.</p>
+    
+    <div id="status-container"></div>
+
+    <div class="form-group">
+        <label for="resume-file">📄 Select Resume/CV File:</label>
+        <input type="file" id="resume-file" accept=".pdf,.doc,.docx">
+        <div class="upload-info">
+            <strong>Supported formats:</strong> PDF (.pdf), Word (.doc, .docx)<br>
+            <strong>Maximum size:</strong> 10 MB
+        </div>
+        <div id="file-info"></div>
+    </div>
+
+    <div class="progress" id="progress-container" style="display: none;">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <button id="upload-btn" disabled>📤 Upload to Firebase Storage</button>
+    <button id="test-connection-btn">🔌 Test Firebase Connection</button>
+
+    <div id="upload-results"></div>
+
+    <hr style="margin: 40px 0;">
+
+    <h2>📋 How to Verify File Upload:</h2>
+    <ol>
+        <li><strong>Select a resume file</strong> (PDF or Word document under 10MB)</li>
+        <li><strong>Click "Upload to Firebase Storage"</strong></li>
+        <li><strong>Check Firebase Console:</strong>
+            <ul>
+                <li>Go to <a href="https://console.firebase.google.com" target="_blank">Firebase Console</a></li>
+                <li>Select your project</li>
+                <li>Go to <strong>Storage</strong></li>
+                <li>Look for the <code>resumes/</code> folder</li>
+                <li>Your uploaded file should be there!</li>
+            </ul>
+        </li>
+    </ol>
+
+    <script type="module">
+        import { storage, db } from './js/firebase.js';
+        import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js";
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
+        const statusContainer = document.getElementById('status-container');
+        const fileInput = document.getElementById('resume-file');
+        const uploadBtn = document.getElementById('upload-btn');
+        const testConnectionBtn = document.getElementById('test-connection-btn');
+        const fileInfo = document.getElementById('file-info');
+        const uploadResults = document.getElementById('upload-results');
+        const progressContainer = document.getElementById('progress-container');
+        const progressBar = document.getElementById('progress-bar');
+
+        function addStatus(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong>: ${message}`;
+            statusContainer.appendChild(div);
+            
+            // Auto-scroll to latest status
+            div.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updateProgress(percent) {
+            progressBar.style.width = percent + '%';
+        }
+
+        // Test Firebase connection
+        testConnectionBtn.addEventListener('click', () => {
+            addStatus('🔍 Testing Firebase connection...', 'info');
+            try {
+                addStatus(`✅ Firebase Storage: ${storage ? 'Connected' : 'Not connected'}`, storage ? 'success' : 'error');
+                addStatus(`✅ Firebase Firestore: ${db ? 'Connected' : 'Not connected'}`, db ? 'success' : 'error');
+                
+                if (storage && db) {
+                    addStatus('🎉 Firebase is properly configured!', 'success');
+                } else {
+                    addStatus('❌ Firebase configuration issue detected', 'error');
+                }
+            } catch (error) {
+                addStatus(`❌ Firebase connection error: ${error.message}`, 'error');
+            }
+        });
+
+        // File validation
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            uploadBtn.disabled = !file;
+            
+            if (file) {
+                const maxSize = 10 * 1024 * 1024; // 10MB
+                const allowedTypes = [
+                    'application/pdf', 
+                    'application/msword', 
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                ];
+                
+                if (!allowedTypes.includes(file.type)) {
+                    fileInfo.style.color = '#dc3545';
+                    fileInfo.innerHTML = '⚠️ Invalid file type. Please select a PDF or Word document.';
+                    uploadBtn.disabled = true;
+                    return;
+                }
+                
+                if (file.size > maxSize) {
+                    fileInfo.style.color = '#dc3545';
+                    fileInfo.innerHTML = '⚠️ File too large. Maximum size is 10MB.';
+                    uploadBtn.disabled = true;
+                    return;
+                }
+                
+                fileInfo.style.color = '#28a745';
+                fileInfo.innerHTML = `✅ Ready to upload: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+                uploadBtn.disabled = false;
+            } else {
+                fileInfo.innerHTML = '';
+                uploadBtn.disabled = true;
+            }
+        });
+
+        // Upload functionality
+        uploadBtn.addEventListener('click', async () => {
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            addStatus('🚀 Starting upload process...', 'info');
+            uploadBtn.disabled = true;
+            uploadBtn.innerHTML = '<span style="animation: spin 1s linear infinite;">⏳</span> Uploading...';
+            progressContainer.style.display = 'block';
+
+            try {
+                // Generate a test application ID
+                const testApplicationId = 'test_' + Date.now();
+                const timestamp = Date.now();
+                const uniqueFileName = `${timestamp}_${file.name}`;
+                
+                addStatus(`📁 Creating storage reference: resumes/${testApplicationId}/${uniqueFileName}`, 'info');
+                
+                // Create storage reference
+                const storageRef = ref(storage, `resumes/${testApplicationId}/${uniqueFileName}`);
+                
+                // Metadata
+                const metadata = {
+                    contentType: file.type,
+                    customMetadata: {
+                        'originalName': file.name,
+                        'uploadedAt': new Date().toISOString(),
+                        'testUpload': 'true'
+                    }
+                };
+
+                addStatus('📤 Uploading to Firebase Storage...', 'info');
+                updateProgress(25);
+
+                // Upload file
+                const snapshot = await uploadBytes(storageRef, file, metadata);
+                addStatus('✅ File uploaded successfully to Firebase Storage!', 'success');
+                updateProgress(75);
+
+                addStatus('🔗 Getting download URL...', 'info');
+                const downloadURL = await getDownloadURL(snapshot.ref);
+                updateProgress(100);
+
+                addStatus('🎉 Upload completed successfully!', 'success');
+
+                // Display results
+                uploadResults.innerHTML = `
+                    <div class="status success">
+                        <h3>📋 Upload Results</h3>
+                        <p><strong>✅ Status:</strong> Upload Successful</p>
+                        <p><strong>📁 Storage Path:</strong> <code>resumes/${testApplicationId}/${uniqueFileName}</code></p>
+                        <p><strong>🔗 Download URL:</strong> <br><a href="${downloadURL}" target="_blank" style="word-break: break-all;">${downloadURL}</a></p>
+                        <p><strong>📊 File Size:</strong> ${(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                        <p><strong>📄 Original Name:</strong> ${file.name}</p>
+                        <p><strong>🕒 Upload Time:</strong> ${new Date().toLocaleString()}</p>
+                    </div>
+                `;
+
+                // Test creating a Firestore record (optional)
+                try {
+                    addStatus('💾 Testing Firestore integration...', 'info');
+                    await addDoc(collection(db, "test_uploads"), {
+                        fileName: uniqueFileName,
+                        originalName: file.name,
+                        downloadURL: downloadURL,
+                        uploadedAt: new Date(),
+                        testUpload: true
+                    });
+                    addStatus('✅ Firestore record created successfully!', 'success');
+                } catch (firestoreError) {
+                    addStatus(`⚠️ Firestore test failed: ${firestoreError.message}`, 'warning');
+                }
+
+            } catch (error) {
+                addStatus(`❌ Upload failed: ${error.message}`, 'error');
+                console.error('Full upload error:', error);
+
+                if (error.code === 'storage/unauthorized') {
+                    addStatus('🔒 Storage unauthorized. Check your Firebase Storage rules!', 'error');
+                }
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.innerHTML = '📤 Upload to Firebase Storage';
+                setTimeout(() => {
+                    progressContainer.style.display = 'none';
+                    updateProgress(0);
+                }, 2000);
+            }
+        });
+
+        // Test connection on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                testConnectionBtn.click();
+            }, 1000);
+        });
+    </script>
+
+    <style>
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</body>
+</html>

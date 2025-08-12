@@ -1,10 +1,81 @@
 {
   "hosting": {
-    "public": "tgc.github.io",
+    "public": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "**/server.js",
+      "**/models/**",
+      "**/routes/**",
+      "**/middleware/**",
+      "**/tgc.github.io/**",
+      "**/scripts/**",
+      "**/*.md",
+      "**/*.env*",
+      "**/*.rules",
+      "**/config.js"
+    ],
+    "rewrites": [
+      {
+        "source": "/about",
+        "destination": "/pages/about.html"
+      },
+      {
+        "source": "/admin",
+        "destination": "/pages/admin.html"
+      },
+      {
+        "source": "/careers",
+        "destination": "/pages/careers.html"
+      },
+      {
+        "source": "/contact",
+        "destination": "/pages/contact.html"
+      },
+      {
+        "source": "/events",
+        "destination": "/pages/events.html"
+      },
+      {
+        "source": "/login",
+        "destination": "/pages/login.html"
+      },
+      {
+        "source": "/partners",
+        "destination": "/pages/partners.html"
+      },
+      {
+        "source": "/services",
+        "destination": "/pages/services.html"
+      },
+      {
+        "source": "/team",
+        "destination": "/pages/team.html"
+      }
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "errorPage": "/public/404.html",
+    "headers": [
+      {
+        "source": "**/*.@(js|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
+      }
     ]
   }
 }
