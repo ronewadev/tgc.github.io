@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const User = require('models/User');
+const admin = require('firebase-admin');
+const db = admin.firestore();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const auth = require('../middleware/auth');
@@ -10,14 +11,17 @@ router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const user = await User.findOne({ username });
-    if (!user) return res.status(400).json({ message: 'Invalid credentials' });
+    // Firestore query for user by username
+    const userSnapshot = await db.collection('users').where('username', '==', username).get();
+    if (userSnapshot.empty) return res.status(400).json({ message: 'Invalid credentials' });
+    const user = userSnapshot.docs[0].data();
+    user.id = userSnapshot.docs[0].id;
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
     const token = jwt.sign(
-      { id: user._id, role: user.role },
+      { id: user.id, role: user.role },
       process.env.JWT_SECRET || 'your_secret_key',
       { expiresIn: '8h' }
     );
@@ -31,7 +35,10 @@ router.post('/login', async (req, res) => {
 // Get current user
 router.get('/me', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    const userDoc = await db.collection('users').doc(req.user.id).get();
+    if (!userDoc.exists) return res.status(404).json({ message: 'User not found' });
+    const user = userDoc.data();
+    delete user.password;
     res.json(user);
   } catch (err) {
     res.status(500).json({ message: err.message });
