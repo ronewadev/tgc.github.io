@@ -31,14 +31,11 @@ if (typeof window.ENV_CONFIG !== 'undefined' && window.ENV_CONFIG.firebase) {
 const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase App Check
-// Get reCAPTCHA site key from ENV_CONFIG or use debug provider in development
 const appCheck = initializeAppCheck(app, {
   provider: new ReCaptchaV3Provider(
-    // Use environment config if available, otherwise use debug token for development
-    window.ENV_CONFIG?.recaptcha?.siteKey || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI' // This is Google's test key
+    window.ENV_CONFIG?.recaptcha?.siteKey || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
   ),
   isTokenAutoRefreshEnabled: true,
-  // Only show debug UI in development (not production)
   debug: window.location.hostname === 'localhost'
 });
 

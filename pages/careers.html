@@ -72,6 +72,49 @@
                 <!-- Job cards will be loaded here dynamically -->
             </div>
         </section>
+        <script type="module">
+        import { db } from '../js/firebase.js';
+        import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const jobsList = document.getElementById('jobs-list');
+            const loadingStatus = document.getElementById('loading-status');
+            try {
+                const querySnapshot = await getDocs(collection(db, "jobs"));
+                if (querySnapshot.empty) {
+                    loadingStatus.textContent = '';
+                    jobsList.innerHTML = '<div style="text-align:center; color:#d32f2f; padding:30px;">No current jobs to display.</div>';
+                    return;
+                }
+                loadingStatus.textContent = '';
+                let html = '';
+                querySnapshot.forEach(doc => {
+                    const job = doc.data();
+                    html += `<div class="job-card">
+                        <h3>${job.title || 'Untitled Position'}</h3>
+                        <div class="job-meta">
+                            <div class="job-meta-item"><i class="fas fa-map-marker-alt"></i> ${job.location || 'Location TBD'}</div>
+                            <div class="job-meta-item"><i class="fas fa-briefcase"></i> ${job.type || 'Full-time'}</div>
+                            <div class="job-meta-item"><i class="fas fa-clock"></i> Posted ${job.postedDate ? new Date(job.postedDate.toDate ? job.postedDate.toDate() : job.postedDate).toLocaleDateString() : 'Recently'}</div>
+                        </div>
+                        <div class="job-description">
+                            <p>${job.description || 'Job description coming soon.'}</p>
+                        </div>
+                        <div class="job-requirements">
+                            <h4>Requirements:</h4>
+                            <ul>
+                                ${(job.requirements && job.requirements.length > 0) ? job.requirements.map(r => `<li>${r}</li>`).join('') : '<li>No specific requirements listed</li>'}
+                            </ul>
+                        </div>
+                    </div>`;
+                });
+                jobsList.innerHTML = html;
+            } catch (error) {
+                loadingStatus.textContent = '';
+                jobsList.innerHTML = `<div style="text-align:center; color:#d32f2f; padding:30px;">Error loading jobs: ${error.message}</div>`;
+            }
+        });
+        </script>
 
         <section id="apply" class="application-section">
             <h2>Application Form</h2>
