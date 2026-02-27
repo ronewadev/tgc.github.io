@@ -64,6 +64,46 @@ nav {
     width: 100%;
 }
 
+/* align navigation items centrally when enough space */
+nav ul {
+    justify-content: center;
+}
+
+/* Dropdown parent positioning */
+nav ul li {
+    position: relative;
+}
+nav ul li .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--glass-light);
+    backdrop-filter: blur(8px);
+    display: none;
+    flex-direction: column;
+    padding: 5px 0;
+    border-radius: 8px;
+    min-width: 180px;
+    z-index: 1000;
+}
+nav ul li:hover .dropdown-menu {
+    display: flex;
+}
+nav ul li .dropdown-menu li a {
+    padding: 8px 20px;
+    white-space: nowrap;
+}
+
+/* footer gradient for dark mode request */
+footer {
+    background: linear-gradient(135deg, #1B4D3E 0%, #072d1f 100%);
+    color: #fff;
+}
+body.dark-mode footer {
+    background: linear-gradient(135deg, #072d1f 0%, #1B4D3E 100%);
+}
+
+
 .logo-container {
     display: flex;
     align-items: center;

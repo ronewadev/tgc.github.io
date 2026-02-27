@@ -23,12 +23,31 @@
         </div>
              <ul id="nav-list">
             <li><a href="../index.html">Home</a></li>
-            <li><a href="./careers.html">Careers</a></li>
-            <li><a href="./events.html">Programs</a></li>
-            <li><a href="./services.html">Services</a></li>
-            <li><a href="./partners.html" class="active">Partners</a></li>
-            <li><a href="./about.html">About</a></li>
-            <li><a href="./contact.html">Contact</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="dropdown">
+                <a href="services.html">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="what-we-do.html">What We Do</a></li>
+                    <li><a href="solutions.html">Solutions</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="partners.html" class="active">Partnerships</a>
+                <ul class="dropdown-menu">
+                    <li><a href="partners.html#support">Partner Support</a></li>
+                    <li><a href="partners.html#oem">OEM Partners</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Insights</a>
+                <ul class="dropdown-menu">
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="awards.html">Awards</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                </ul>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
         <div class="dark-mode-toggle" onclick="toggleDarkMode()">
             <i class="fas fa-moon"></i>
@@ -62,6 +81,17 @@
         </div>
     </div>
 </section>
+
+    <!-- anchor sections for partnerships -->
+    <section id="support" class="partner-section">
+        <h2>Partner Support (Service Providers)</h2>
+        <p>Information and resources for our service provider partners.</p>
+    </section>
+
+    <section id="oem" class="partner-section">
+        <h2>OEM Partners</h2>
+        <p>Details about our OEM relationships including Huawei, Microsoft and others.</p>
+    </section>
 
         <div class="partners-grid">
             <div class="partner-card">                <div class="partner-logo dell">
@@ -170,7 +200,8 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2024 Techno Globe Center SA (PTY) LTD. All rights reserved.</p>
+            <p>&copy; 2016 Techno Globe Center (SA) (PTY) LTD. All rights reserved. Terms and Conditions.</p>
+            <p>Website hosted by Afrihost.</p>
         </div>
     </footer>
     <script src="../js/scripts.js"></script>
