@@ -24,7 +24,7 @@
         <li><a href="../index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li class="dropdown">
-            <a href="services.html">Services</a>
+            <a href="#" class="disabled" onclick="return false;">Services</a>
             <ul class="dropdown-menu">
                 <li><a href="what-we-do.html">What We Do</a></li>
                 <li><a href="solutions.html">Solutions</a></li>
@@ -61,29 +61,37 @@
 
   <section class="contact-form-section">
     <div class="main-container">
-      <h2>Contact Us</h2>
-      <form id="contactForm" action="mailto:info@tgc-sa.co.za" method="post" enctype="text/plain">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" placeholder="Enter your name..." required />
+      <div class="contact-wrapper">
+        <div class="contact-form-container">
+          <h2>Send us a Message</h2>
+          <form id="contactForm" action="mailto:info@tgc-sa.co.za" method="post" enctype="text/plain">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Enter your full name..." required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="Enter your email address..." required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="Enter your phone number..." />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="What is this about?" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="6" placeholder="Tell us more about your inquiry..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email..." required />
-        </div>
-        <div class="form-group">
-          <label for="subject">Subject</label>
-          <input type="text" id="subject" name="subject" placeholder="Your subject..." required />
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Send Message</button>
-      </form>
 
-      <div class="contact-details">
-        <h3>We Are Here</h3>
+        <div class="contact-info-container">
+          <h2>Get in Touch</h2>
+          <div class="contact-details">
         <p><strong>Directors:</strong></p>
         <ul>
           <li>Cell: +27 (0)71 313 7756</li>
@@ -108,6 +116,8 @@
           1876
         </p>
         <p>&copy; 2016 Techno Globe Center (SA) (PTY) LTD - All rights reserved.<br>Terms and Conditions.</p>
+        </div>
+        </div>
       </div>
     </div>
   </section>
@@ -128,7 +138,8 @@
         <a href="index.html">Home</a>
         <a href="careers.html">Careers</a>
         <a href="events.html">Programs</a>
-        <a href="services.html">Services</a>
+        <a href="what-we-do.html">What We Do</a>
+        <a href="solutions.html">Solutions</a>
         <a href="partners.html">Partners</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
