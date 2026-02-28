@@ -429,13 +429,42 @@ nav ul li a.disabled:hover {
 }
 
 .feature-list {
-    list-style: disc inside;
+    list-style: none;
     margin: 20px 0;
-    padding-left: 20px;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
 }
 
 .feature-list li {
-    margin-bottom: 8px;
+    margin-bottom: 0;
+    background: var(--card-bg-light);
+    padding: 20px 20px 20px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.feature-list li::before {
+    content: '\f0da';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+}
+
+.feature-list li:hover {
+    transform: translateY(-3px);
+}
+
+body.dark-mode .feature-list li {
+    background: var(--card-bg-dark);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .events-section {
@@ -1684,6 +1713,7 @@ body.dark-mode .service-card:hover {
     padding: 60px 20px;
     background: rgba(235, 245, 255, 0.5);
     width: 100%;
+    text-align: center;
 }
 
 body.dark-mode .team-section {
@@ -1757,7 +1787,7 @@ footer {
 
 /* keep dark-mode version in case earlier rule was overridden */
 body.dark-mode footer {
-    background: linear-gradient(135deg, #072d1f 0%, #1B4D3E 100%);
+    background: linear-gradient(135deg, #081933  0%, #162d50  100%);
 }
 
 
@@ -2147,6 +2177,43 @@ body.dark-mode .about-card {
     font-size: 1.8rem;
     margin-bottom: 20px;
     color: var(--primary-color);
+}
+
+/* Mission & Vision grid wrapper */
+.mission-vision {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 60px 0;
+}
+
+/* Card icon color in dark mode should use cadmium green gradient */
+body.dark-mode .about-icon {
+    background: linear-gradient(135deg, #006B3C, #0a534b);
+}
+
+/* Values cards: ensure icon and text alignment */
+.values-container .value-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* dark mode accent color for headings and icons */
+body.dark-mode .value-card h3 i,
+body.dark-mode .about-card h2 {
+    color: #006B3C;
+}
+
+/* safety: ensure values-section headings stand out */
+.values-section h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+}
+
+body.dark-mode .values-section h2 {
+    color: #006B3C;
 }
 
 .about-card p {
@@ -3190,6 +3257,33 @@ body.dark-mode .company-credentials li {
     margin: 0px 20px;
 }
 
+/* About page specific text formatting */
+.about-text {
+    max-width: 800px;
+    margin: 40px auto;
+}
+.about-text h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+.about-text p {
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+/* keep dropdown opened when parent has open class */
+nav ul li.open .dropdown-menu {
+    display: flex;
+}
+
+nav ul li.open > a {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
     /* Contact Section */
     .contact-container {
       display: flex;
@@ -3273,7 +3367,7 @@ body.dark-mode .company-credentials li {
       background: #2563eb;
     }
 
-        /* Modal Styles */
+/* Modal Styles */
     .modal {
       display: none;
       position: fixed;

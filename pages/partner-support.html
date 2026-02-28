@@ -23,17 +23,17 @@
             <li><a href="../index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li class="dropdown">
-                <a href="#" class="disabled" onclick="return false;">Services</a>
+                <a href="#"  onclick="return false;">Services</a>
                 <ul class="dropdown-menu">
                     <li><a href="what-we-do.html">What We Do</a></li>
                     <li><a href="solutions.html">Solutions</a></li>
                 </ul>
             </li>
-            <li class="dropdown">
-                <a href="partners.html">Partnerships</a>
+            <li class="dropdown open">
+                <a href="#" class="active">Partnerships</a>
                 <ul class="dropdown-menu">
-                    <li><a href="partner-support.html">Partner Support</a></li>
-                    <li><a href="oem-partners.html">OEM Partners</a></li>
+                    <li><a href="partners.html" class="active">Partner Support</a></li>
+                    <li><a href="partners.html#oem">OEM Partners</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -122,6 +122,10 @@
     </div>
 </footer>
 
+<script>
+// redirect to main partners page with anchor
+window.location.href = "partners.html";
+</script>
 <script src="../js/scripts.js"></script>
 </body>
 </html>
