@@ -64,6 +64,47 @@ nav {
     width: 100%;
 }
 
+/* align navigation items centrally when enough space */
+nav ul {
+    justify-content: center;
+}
+
+/* Dropdown parent positioning */
+nav ul li {
+    position: relative;
+}
+nav ul li .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--glass-light);
+    backdrop-filter: blur(8px);
+    display: none;
+    flex-direction: column;
+    padding: 5px 0;
+    border-radius: 8px;
+    min-width: 180px;
+    z-index: 1000;
+}
+nav ul li:hover .dropdown-menu {
+    display: flex;
+}
+nav ul li .dropdown-menu li a {
+    padding: 8px 20px;
+    white-space: nowrap;
+}
+
+/* footer gradient matching menu colors */
+footer {
+    background: linear-gradient(135deg, #196df5, #60a5fa);
+    color: #fff;
+}
+body.dark-mode footer {
+    background: #002155;
+    backdrop-filter: blur(10px);
+}
+
+
 .logo-container {
     display: flex;
     align-items: center;
@@ -375,6 +416,61 @@ body.dark-mode .hero {
 }
 
         /* --- Events & Programs Section --- */
+.info-section {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* disabled nav link style */
+nav ul li a.disabled {
+    color: rgba(255,255,255,0.6);
+    cursor: default;
+    text-decoration: none;
+}
+nav ul li a.disabled:hover {
+    background: none;
+}
+
+.feature-list {
+    list-style: none;
+    margin: 20px 0;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.feature-list li {
+    margin-bottom: 0;
+    background: var(--card-bg-light);
+    padding: 20px 20px 20px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.feature-list li::before {
+    content: '\f0da';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+}
+
+.feature-list li:hover {
+    transform: translateY(-3px);
+}
+
+body.dark-mode .feature-list li {
+    background: var(--card-bg-dark);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
 .events-section {
     padding: 60px 20px 40px 20px;
     background: linear-gradient(135deg, #f0f6ff 60%, #e3f2fd 100%);
@@ -737,6 +833,93 @@ body.dark-mode .form-group select {
 .form-group select:focus {
     border-color: var(--primary-color);
     outline: none;
+}
+
+/* Contact page styles */
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.contact-form-container {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+body.dark-mode .contact-form-container {
+    background: #1a2332;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.contact-form-container h2 {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+.contact-info-container {
+    background: #f0f7ff;
+    padding: 30px;
+    border-radius: 12px;
+    border-left: 5px solid var(--primary-color);
+}
+
+body.dark-mode .contact-info-container {
+    background: #0a3d5c;
+    border-left-color: #60a5fa;
+}
+
+.contact-info-container h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.contact-details {
+    line-height: 1.8;
+}
+
+.contact-details p {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+body.dark-mode .contact-details p {
+    color: #cbd5e1;
+}
+
+.contact-details ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.contact-details li {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+body.dark-mode .contact-details li {
+    color: #cbd5e1;
+}
+
+.contact-details strong {
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .contact-form-container,
+    .contact-info-container {
+        padding: 20px;
+    }
 }
 
 .form-row {
@@ -1547,6 +1730,7 @@ body.dark-mode .service-card:hover {
     padding: 60px 20px;
     background: rgba(235, 245, 255, 0.5);
     width: 100%;
+    text-align: center;
 }
 
 body.dark-mode .team-section {
@@ -1611,12 +1795,18 @@ body.dark-mode .team-card p {
 
 /* Footer */
 footer {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        background: linear-gradient(135deg, #196df5, #60a5fa);
     color: white;
     padding: 60px 20px 30px;
     text-align: center;
     position: relative;
 }
+
+/* keep dark-mode version in case earlier rule was overridden */
+body.dark-mode footer {
+    background: linear-gradient(135deg, #081933  0%, #162d50  100%);
+}
+
 
 .footer-content {
     max-width: 1200px;
@@ -2003,6 +2193,43 @@ body.dark-mode .about-card {
     font-size: 1.8rem;
     margin-bottom: 20px;
     color: var(--primary-color);
+}
+
+/* Mission & Vision grid wrapper */
+.mission-vision {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 60px 0;
+}
+
+/* Card icon color in dark mode should use cadmium green gradient */
+body.dark-mode .about-icon {
+    background: linear-gradient(135deg, #006B3C, #0a534b);
+}
+
+/* Values cards: ensure icon and text alignment */
+.values-container .value-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* dark mode accent color for headings and icons */
+body.dark-mode .value-card h3 i,
+body.dark-mode .about-card h2 {
+    color: #006B3C;
+}
+
+/* safety: ensure values-section headings stand out */
+.values-section h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+}
+
+body.dark-mode .values-section h2 {
+    color: #006B3C;
 }
 
 .about-card p {
@@ -3045,6 +3272,34 @@ body.dark-mode .company-credentials li {
 .main-container {
     margin: 0px 20px;
 }
+
+/* About page specific text formatting */
+.about-text {
+    max-width: 800px;
+    margin: 40px auto;
+}
+.about-text h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+.about-text p {
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+/* keep dropdown opened when parent has open class */
+nav ul li.open .dropdown-menu {
+    display: flex;
+}
+
+nav ul li.open > a {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
     /* Contact Section */
     .contact-container {
       display: flex;
@@ -3128,7 +3383,7 @@ body.dark-mode .company-credentials li {
       background: #2563eb;
     }
 
-        /* Modal Styles */
+/* Modal Styles */
     .modal {
       display: none;
       position: fixed;

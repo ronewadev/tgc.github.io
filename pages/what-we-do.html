@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What We Do - Techno Globe Center SA</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+<header>
+    <nav>
+        <div class="logo-container">
+            <button class="menu-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <div class="logo-img"><img src="../images/tgc_Logo.png" class="logo" /></div>
+            <div class="logo-text"><img src="../images/tgc_slogan1.png" class="tagline" /></div>
+        </div>
+        <ul id="nav-list">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="dropdown">
+                <a href="#"  onclick="return false;">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="what-we-do.html">What We Do</a></li>
+                    <li><a href="solutions.html">Solutions</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Partnerships</a>
+                <ul class="dropdown-menu">
+                    <li><a href="partners.html">Partner Support</a></li>
+                    <li><a href="partners.html#oem">OEM Partners</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Insights</a>
+                <ul class="dropdown-menu">
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="awards.html">Awards</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                </ul>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="dark-mode-toggle" onclick="toggleDarkMode()">
+            <i class="fas fa-moon"></i>
+        </div>
+    </nav>
+</header>
+
+<section class="page-hero">
+    <h1>What We Do</h1>
+    <p>Overview of our core services and capabilities.</p>
+</section>
+
+<div class="main-container">
+    <section class="info-section">
+        <div class="section-title">
+            <h2>Our Approach</h2>
+        </div>
+        <p>We leverage a combination of deep technical expertise and business acumen to deliver customized ICT solutions that align with client goals. From initial discovery through implementation and support, our methodology is collaborative, transparent, and results-driven.</p>
+    </section>
+    <section class="info-section">
+        <div class="section-title">
+            <h2>Core Focus Areas</h2>
+        </div>
+        <ul class="feature-list">
+            <li>Strategic IT Consulting</li>
+            <li>Digital Transformation Planning</li>
+            <li>Custom Software Development</li>
+            <li>Cloud Architecture & Deployment</li>
+            <li>Cybersecurity & Compliance</li>
+        </ul>
+    </section>
+    <section class="info-section">
+        <div class="section-title">
+            <h2>Case Studies</h2>
+        </div>
+        <p>Over the years, we've successfully completed projects across industries such as healthcare, finance, and manufacturing. Our teams work closely with clients to tailor solutions that solve real-world problems and improve operational efficiency.</p>
+        <p>Example: A regional hospital reduced downtime by 40% using our managed services and cloud migration strategy.</p>
+    </section>
+
+    <!-- include full services section from services.html -->
+    <section class="services-section">
+        <div class="section-title">
+            <h2>Our Service Offerings</h2>
+            <p>We provide end-to-end ICT solutions designed to drive business success</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3>IT Professional & Business Consulting</h3>
+                <p>Expert advisory services focused on IT strategy, digital transformation, and infrastructure
+                    optimization to align technology with business objectives.</p>
+                <div class="service-features">
+                    <ul>
+                        <li>IT Strategy Development</li>
+                        <li>Digital Transformation Roadmaps</li>
+                        <li>Technology Assessments</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3>Managed Shared Services</h3>
+                <p>Comprehensive IT management solutions including infrastructure maintenance, network monitoring, and
+                    systems support.</p>
+                <div class="service-features">
+                    <ul>
+                        <li>24/7 Infrastructure Monitoring</li>
+                        <li>Service Desk Support</li>
+                        <li>Proactive System Maintenance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <h3>Cloud Solutions</h3>
+                <p>As a Huawei Cloud Solutions Partner, we deliver scalable cloud services including migration,
+                    management, and optimization.</p>
+                <div class="service-features">
+                    <ul>
+                        <li>Cloud Migration Services</li>
+                        <li>Multi-Cloud Strategies</li>
+                        <li>Cloud Cost Optimization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Cybersecurity</h3>
+                <p>Comprehensive security solutions to protect your digital assets and ensure regulatory compliance.</p>
+                <div class="service-features">
+                    <ul>
+                        <li>Threat Detection & Response</li>
+                        <li>Endpoint Protection</li>
+                        <li>Security Compliance Frameworks</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-windows"></i>
+                </div>
+                <h3>Microsoft Modern Business Solutions</h3>
+                <p>Leveraging Microsoft technologies including Azure, Office 365, and Dynamics 365 for intelligent
+                    business solutions.</p>
+                <div class="service-features">
+                    <ul>
+                        <li>Microsoft Azure Implementation</li>
+                        <li>Office 365 Migration</li>
+                        <li>Dynamics 365 Customization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h3>Infrastructure Services</h3>
+                <p>End-to-end infrastructure solutions to support your business operations and growth.</p>
+                <div class="service-features">
+                    <ul>
+                        <li>Data Center Maintenance</li>
+                        <li>Hardware Provisioning</li>
+                        <li>IT Support Services</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Software Development</h3>
+                <p>Custom enterprise software solutions built to meet unique business requirements and drive efficiency.
+                </p>
+                <div class="service-features">
+                    <ul>
+                        <li>Web Application Development</li>
+                        <li>Mobile App Development</li>
+                        <li>Business Process Automation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>Data Analytics</h3>
+                <p>Transform your data into actionable insights with our advanced analytics solutions.</p>
+                <div class="service-features">
+                    <ul>
+                        <li>Business Intelligence</li>
+                        <li>Predictive Analytics</li>
+                        <li>Data Visualization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <h3>Network & Cabling Services</h3>
+                <p>Professional network infrastructure development and structured cabling solutions.</p>
+                <div class="service-features">
+                    <ul>
+                        <li>Network Design & Implementation</li>
+                        <li>Structured Cabling</li>
+                        <li>Network Security</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-column">
+            <h3>Techno Globe Center SA</h3>
+            <p>Providing innovative ICT solutions since 2013. We help businesses grow through technology.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <a href="../index.html">Home</a>
+            <a href="careers.html">Careers</a>
+            <a href="events.html">Programs</a>
+            <a href="what-we-do.html">What We Do</a>
+            <a href="solutions.html">Solutions</a>
+            <a href="partners.html">Partners</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-column">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-map-marker-alt"></i> 14 South Road, Walkerville, 1961</p>
+            <p><i class="fas fa-phone"></i> +27 61 549 0358</p>
+            <p><i class="fas fa-envelope"></i> info@tgc-sa.co.za</p>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2016 Techno Globe Center (SA) (PTY) LTD. All rights reserved. Terms and Conditions.</p>
+        <p>Website hosted by Afrihost.</p>
+    </div>
+</footer>
+
+<script src="../js/scripts.js"></script>
+</body>
+</html>

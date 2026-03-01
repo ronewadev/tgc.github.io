@@ -22,42 +22,54 @@
             </div>
              <ul id="nav-list">
             <li><a href="../index.html">Home</a></li>
-            <li><a href="./careers.html">Careers</a></li>
-            <li><a href="./events.html" class="active">Programs</a></li>
-            <li><a href="./services.html">Services</a></li>
-            <li><a href="./partners.html">Partners</a></li>
-            <li><a href="./about.html">About</a></li>
-            <li><a href="./contact.html">Contact</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="dropdown">
+                <a href="#"  onclick="return false;">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="what-we-do.html">What We Do</a></li>
+                    <li><a href="solutions.html">Solutions</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Partnerships</a>
+                <ul class="dropdown-menu">
+                    <li><a href="partners.html">Partner Support</a></li>
+                    <li><a href="partners.html#oem">OEM Partners</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Insights</a>
+                <ul class="dropdown-menu">
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="awards.html">Awards</a></li>
+                    <li><a href="events.html" class="active">Events</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                </ul>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
-            <div class="dark-mode-toggle" onclick="toggleDarkMode()">
-                <i class="fas fa-moon"></i>
-            </div>
-        </nav>
-    </header>
+    </nav>
+</header>
 
-    <section class="page-hero">
-        <h1>Events, Sponsorships & Programs</h1>
-        <p>Engaging with our community through impactful initiatives and partnerships</p>
+    <section class="events-section">
+        <div class="events-container">
+            <div class="events-intro">
+                <h2>Our Community Engagement</h2>
+                <p>At Techno Globe Center SA, we're committed to fostering growth and innovation through various events, sponsorships, and development programs. These initiatives reflect our dedication to knowledge sharing, community development, and industry advancement.</p>
+                <p>From tech conferences to youth development programs, we create platforms that inspire, educate, and connect people across the ICT ecosystem. Explore our upcoming events and discover how you can participate or partner with us.</p>
+            </div>
+            <div class="upcoming-card">
+                <h3>Upcoming Events</h3>
+                <ul>
+                    <li><strong>Tech Innovation Summit</strong> - August 15-16, 2024</li>
+                    <li><strong>Women in ICT Conference</strong> - September 5, 2024</li>
+                    <li><strong>Annual Hackathon</strong> - October 12-13, 2024</li>
+                    <li><strong>Digital Skills Workshop</strong> - Monthly sessions</li>
+                    <li><strong>Cloud Computing Masterclass</strong> - November 8, 2024</li>
+                </ul>
+            </div>
+        </div>
     </section>
-
-    <div class="main-container">
-        <section class="events-section">
-            <div class="events-container">
-                <div class="events-intro">
-                    <h2>Our Community Engagement</h2>
-                    <p>At Techno Globe Center SA, we're committed to fostering growth and innovation through various events, sponsorships, and development programs.</p>
-                </div>
-                <div class="upcoming-card">
-                    <h3>Upcoming Events</h3>
-                    <div id="events-loading" style="text-align: center; padding: 20px; color: #666;">
-                        <i class="fas fa-spinner fa-spin"></i> Loading events...
-                    </div>
-                    <ul id="events-list">
-                        <!-- Dynamic events will be loaded here -->
-                    </ul>
-                </div>
-            </div>
-        </section>
 
         <section class="programs-container">
             <h2 class="section-title">Our Programs & Initiatives</h2>
@@ -139,7 +151,8 @@
                 <a href="../index.html">Home</a>
                 <a href="careers.html">Careers</a>
                 <a href="events.html">Programs</a>
-                <a href="services.html">Services</a>
+                <a href="what-we-do.html">What We Do</a>
+                <a href="solutions.html">Solutions</a>
                 <a href="partners.html">Partners</a>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
@@ -152,7 +165,8 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2024 Techno Globe Center SA (PTY) LTD. All rights reserved.</p>
+            <p>&copy; 2016 Techno Globe Center (SA) (PTY) LTD. All rights reserved. Terms and Conditions.</p>
+            <p>Website hosted by Afrihost.</p>
         </div>
     </footer>
 

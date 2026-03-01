@@ -66,12 +66,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set active navigation link
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('nav a').forEach(link => {
-        const linkPage = link.getAttribute('href').split('/').pop();
+        const href = link.getAttribute('href');
+        const linkPage = href.split('/').pop().split('#')[0];
+        // skip anchor links, handle them later
+        if (href.includes('#')) return;
         if (currentPage === linkPage || 
             (currentPage === '' && linkPage === 'index.html')) {
             link.classList.add('active');
+            const dropdownLi = link.closest('.dropdown');
+            if (dropdownLi) {
+                dropdownLi.classList.add('open');
+            }
         }
     });
+
+    // Extra behavior for partners page with anchors
+    if (currentPage === 'partners.html') {
+        const hash = window.location.hash;
+        if (hash === '#support' || hash === '#oem') {
+            const targetEl = document.querySelector(hash);
+            if (targetEl) {
+                setTimeout(() => {
+                    window.scrollTo({ top: targetEl.offsetTop - 100, behavior: 'smooth' });
+                }, 100);
+            }
+            const anchorLink = document.querySelector(`nav a[href$="${hash}"]`);
+            if (anchorLink) {
+                anchorLink.classList.add('active');
+                const parent = anchorLink.closest('.dropdown');
+                if (parent) parent.classList.add('open');
+            }
+        }
+    }
 });
 
 // Mobile Menu Toggle

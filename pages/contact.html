@@ -6,7 +6,6 @@
   <title>Contact Us - Techno Globe Center SA (TGC SA)</title>
   <link rel="icon" type="image/png" href="../images/tgc_Logo.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <link rel="stylesheet" href="../css/styles.css">
 
 </head>
@@ -24,11 +23,30 @@
       </div>
       <ul id="nav-list">
         <li><a href="../index.html">Home</a></li>
-        <li><a href="careers.html">Careers</a></li>
-        <li><a href="events.html">Programs</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="partners.html">Partners</a></li>
         <li><a href="about.html">About</a></li>
+        <li class="dropdown">
+            <a href="#"  onclick="return false;">Services</a>
+            <ul class="dropdown-menu">
+                <li><a href="what-we-do.html">What We Do</a></li>
+                <li><a href="solutions.html">Solutions</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#">Partnerships</a>
+            <ul class="dropdown-menu">
+                <li><a href="partners.html">Partner Support</a></li>
+                <li><a href="partners.html#oem">OEM Partners</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#">Insights</a>
+            <ul class="dropdown-menu">
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="awards.html">Awards</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="careers.html">Careers</a></li>
+            </ul>
+        </li>
         <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
       <div class="dark-mode-toggle" onclick="toggleDarkMode()">
@@ -39,97 +57,71 @@
 
   <section class="page-hero">
     <h1>Contact Us</h1>
-    <p>We'd love to hear from you! Reach out to Techno Globe Center SA for partnership, support, or general queries.</p>
+    <p>Be in touch with us to experience our service</p>
   </section>
 
-  
+  <section class="contact-form-section">
+    <div class="main-container">
+      <div class="contact-wrapper">
+        <div class="contact-form-container">
+          <h2>Send us a Message</h2>
+          <form id="contactForm" action="mailto:info@tgc-sa.co.za" method="post" enctype="text/plain">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Enter your full name..." required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="Enter your email address..." required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="Enter your phone number..." />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="What is this about?" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="6" placeholder="Tell us more about your inquiry..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
 
-  <section class="contact-container">
-    <div class="contact-intro" data-aos="fade-up">
-      <h2>Get In Touch</h2>
-      <p>Choose your preferred method to connect with our team. We're here to help you with anything you need.</p>
-      <div class="contact-methods" style="margin-top: 5rem;">
-        <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
-          <i class="fas fa-envelope"></i>
-          <h3>Email Us</h3>
-          <p>Send us your queries or proposals by email.</p>
-          <button onclick="openModal('email')">Email</button>
+        <div class="contact-info-container">
+          <h2>Get in Touch</h2>
+          <div class="contact-details">
+        <p><strong>Directors:</strong></p>
+        <ul>
+          <li>Cell: +27 (0)71 313 7756</li>
+          <li>Cell: +27 (0)83 882 9228</li>
+          <li>Cell: +27 (0)76 285 3136</li>
+        </ul>
+        <p><strong>Information Enquiries:</strong></p>
+        <p>Tel no.: +27 (0)83 882 9228 | +27 (0)71 313 7756</p>
+        <p>Fax no.: +27 (0)86 750 2955 | +27 (0)86 551 9301</p>
+        <p>E-Mail: info@tgc-sa.co.za or technoglobesa@gmail.com</p>
+        <p>Website: www.tgc-sa.co.za</p>
+        <p><strong>Physical Address</strong><br>
+          14 South Rd<br>
+          Walkers Fruit Farms,<br>
+          Walkerville<br>
+          1896<br>
+          <em>Alternate:</em> 62 Waterloo Rd, Kosmosdal, Centurion, 0157
+        </p>
+        <p><strong>Postal Address</strong><br>
+          P.O Box 206,<br>
+          Walkerville,<br>
+          1876
+        </p>
+        <p>&copy; 2016 Techno Globe Center (SA) (PTY) LTD - All rights reserved.<br>Terms and Conditions.</p>
         </div>
-        <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
-          <i class="fab fa-whatsapp"></i>
-          <h3>WhatsApp</h3>
-          <p>Start a quick WhatsApp conversation with our support team.</p>
-          <button onclick="openModal('whatsapp')">Chat</button>
-        </div>
-        <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
-          <i class="fas fa-phone"></i>
-          <h3>Call Us</h3>
-          <p>Speak directly with a team member for assistance.</p>
-          <button onclick="openModal('call')">Call</button>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Modals -->
-  <div id="emailModal" class="modal">
-    <div class="modal-content">
-      <button class="close-modal" onclick="closeModal()">&times;</button>
-      <h3>Email Us</h3>
-      <form onsubmit="sendEmail(event)">
-        <input type="text" placeholder="Your Name" required />
-        <input type="email" placeholder="Your Email" required />
-        <textarea placeholder="Your Message" rows="4" required></textarea>
-        <div class="btn-group">
-          <button type="submit">Send</button>
-          <button type="button" onclick="closeModal()">Cancel</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div id="whatsappModal" class="modal">
-    <div class="modal-content">
-      <button class="close-modal" onclick="closeModal()">&times;</button>
-      <h3>WhatsApp Us</h3>
-      <form onsubmit="sendWhatsApp(event)">
-        <input type="text" id="wa-name" placeholder="Your Name" required />
-        <input type="text" id="wa-number" placeholder="Your Number" required />
-        <input type="text" id="wa-org" placeholder="Organization Name" required />
-        <textarea id="wa-message" placeholder="Your Message" rows="3" required></textarea>
-        <div class="btn-group">
-          <button type="submit">Send</button>
-          <button type="button" onclick="closeModal()">Cancel</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div id="callModal" class="modal">
-    <div class="modal-content">
-      <button class="close-modal" onclick="closeModal()">&times;</button>
-      <h3>Call Us</h3>
-      <p>You can reach us through any of these numbers:</p>
-      <div class="phone-numbers">
-        <div class="phone-number-card">
-          <span>General Inquiries:</span>
-          <a href="tel:+27615490358">+27 61 549 0358</a>
-        </div>
-        <div class="phone-number-card">
-          <span>Support:</span>
-          <a href="tel:+27831234567">+27 83 123 4567</a>
-        </div>
-        <div class="phone-number-card">
-          <span>Sales:</span>
-          <a href="tel:+27721234567">+27 72 123 4567</a>
-        </div>
-      </div>
-      <div class="btn-group">
-        <button type="button" onclick="closeModal()">Close</button>
-      </div>
-    </div>
-  </div>
-
   <footer>
     <div class="footer-content">
       <div class="footer-column">
@@ -147,7 +139,8 @@
         <a href="index.html">Home</a>
         <a href="careers.html">Careers</a>
         <a href="events.html">Programs</a>
-        <a href="services.html">Services</a>
+        <a href="what-we-do.html">What We Do</a>
+        <a href="solutions.html">Solutions</a>
         <a href="partners.html">Partners</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
@@ -160,19 +153,12 @@
       </div>
     </div>
     <div class="copyright">
-      <p>&copy; 2024 Techno Globe Center SA (PTY) LTD. All rights reserved.</p>
+      <p>&copy; 2016 Techno Globe Center (SA) (PTY) LTD. All rights reserved. Terms and Conditions.</p>
+      <p>Website hosted by Afrihost.</p>
     </div>
   </footer>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Initialize AOS animation library
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: true
-    });
-
     // Toggle mobile menu
     function toggleMenu() {
       const navList = document.getElementById('nav-list');
@@ -189,50 +175,7 @@
         icon.classList.replace('fa-sun', 'fa-moon');
       }
     }
-
-    // Modal functions
-    function openModal(type) {
-      document.getElementById(`${type}Modal`).classList.add('active');
-    }
-
-    function closeModal() {
-      document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
-    }
-
-    // Close modal when clicking outside content
-    window.addEventListener('click', function(event) {
-      if (event.target.classList.contains('modal')) {
-        closeModal();
-      }
-    });
-
-    // Contact form functions
-    function sendWhatsApp(event) {
-      event.preventDefault();
-      const name = document.getElementById('wa-name').value;
-      const number = document.getElementById('wa-number').value;
-      const org = document.getElementById('wa-org').value;
-      const message = document.getElementById('wa-message').value;
-
-      const text = `Hello, my name is ${name} from ${org}. My number is ${number}. ${message}`;
-      const url = `https://wa.me/27615490358?text=${encodeURIComponent(text)}`;
-      window.open(url, '_blank');
-      closeModal();
-    }
-
-    function sendEmail(event) {
-      event.preventDefault();
-      const email = 'info@tgc-sa.co.za';
-      const name = event.target[0].value;
-      const userEmail = event.target[1].value;
-      const message = event.target[2].value;
-
-      const subject = encodeURIComponent(`Message from ${name}`);
-      const body = encodeURIComponent(`From: ${userEmail}\n\n${message}`);
-      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-      closeModal();
-    }
   </script>
-   <script src="../js/scripts.js"></script>
+  <script src="../js/scripts.js"></script>
 </body>
 </html>
